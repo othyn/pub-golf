@@ -1,19 +1,26 @@
 let mix = require('laravel-mix');
+// Imports
 
-mix.options({
-    purifyCss: true,
+let options = {
     processCssUrls: false,
     autoprefixer: {
         browsers: ['last 3 versions', '> 1%'],
         cascade: true
     }
-});
-// Webpack plugin config
+};
+// Mix options
 
 if (mix.inProduction()) {
+
     mix.version();
+    // Generate with versioning / cache busting
+
+    options.purifyCss = true;
+    // Only compile required CSS
 }
-// If in prod, generate versioning / cache busting
+
+mix.options(options);
+// Webpack plugin config
 
 mix.sass('resources/assets/sass/app.scss', 'public/dist/css', { outputStyle: 'expanded' });
 // Sass
