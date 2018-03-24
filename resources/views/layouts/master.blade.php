@@ -18,6 +18,8 @@
 
         @yield ('content')
 
+        @include ('layouts.footer')
+
         <script src="{{ CDN::mix('/dist/js/manifest.js') }}"></script>
         <script src="{{ CDN::mix('/dist/js/vendor.js') }}"></script>
         <script src="{{ CDN::mix('/dist/js/app.js') }}"></script>
