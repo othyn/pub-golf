@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+// Title font
+
 @import "variables";
 // Variables
 
@@ -6,3 +9,25 @@
 
 @import "~font-awesome/scss/font-awesome.scss";
 // FontAwesome 4.7
+
+@import "positioning";
+// Positioning helpers
+
+@media screen and (max-width: 768px) {
+    .reverse-row-mobile {
+        flex-direction: row-reverse
+    }
+}
+
+.fancy-font {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700
+}
+
+.is-size-0 {
+    font-size: 5rem
+}
+
+.footer {
+    padding: 3rem 1.5rem
+}
