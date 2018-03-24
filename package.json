@@ -13,6 +13,7 @@
     "axios": "^0.18",
     "bulma": "^0.6.2",
     "cross-env": "^5.1",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.2",
     "laravel-mix": "^2.0",
     "purify-css": "^1.2.5",
