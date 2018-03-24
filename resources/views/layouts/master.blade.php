@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Othyn</title>
+        <title>Pub Golf</title>
 
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="stylesheet" href="{{ CDN::mix('/dist/css/app.css') }}">
