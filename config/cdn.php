@@ -94,7 +94,7 @@ return [
                 | https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
                 |
                 */
-                'region' => '',
+                'region' => 'ams3',
 
                 /*
                 |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
                 | https://www.digitalocean.com/community/questions/how-to-use-digitalocean-spaces-with-the-aws-s3-sdks?answer=39594
                 |
                 */
-                'endpoint' => '',
+                'endpoint' => 'https://ams3.digitaloceanspaces.com',
 
                 /*
                 |--------------------------------------------------------------------------
@@ -126,9 +126,10 @@ return [
                 | * Note: in case of multiple buckets remove the '*'
                 |
                 */
-                'buckets'       => [
+                'buckets' => [
 
-                    'bucket-name' => '*',
+                    'pub-golf-assets' => '*',
+
                     // examples:
                     //   'your-js-bucket-name-here'   =>  ['public/js'],
                     //   'your-css-bucket-name-here'  =>  ['public/css'],
@@ -200,7 +201,7 @@ return [
                 | Add expiry data to file
                 |
                 */
-                'expires' => gmdate('D, d M Y H:i:s T', strtotime('+5 years')),
+                'expires' => gmdate('D, d M Y H:i:s T', strtotime('+10 years')),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -229,8 +230,8 @@ return [
     |
     */
     'include'   => [
-        'directories' => ['public'],
-        'extensions'  => [],
+        'directories' => ['public/dist'],
+        'extensions'  => ['.js', '.css'],
         'patterns'    => [],
     ],
 
@@ -248,7 +249,7 @@ return [
     'exclude'   => [
         'directories' => [],
         'files'       => [],
-        'extensions'  => [],
+        'extensions'  => ['.DS_Store'],
         'patterns'    => [],
         'hidden'      => true,
     ],
