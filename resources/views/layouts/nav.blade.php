@@ -4,7 +4,7 @@
 
         <div class="navbar-brand">
 
-            <a class="navbar-item" href="/">Pub Golf</a>
+            <a class="navbar-item is-active" href="/">Pub Golf</a>
 
             <span class="navbar-burger burger" data-target="navbarMenu">
                 <span></span>
