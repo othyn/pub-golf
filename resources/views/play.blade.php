@@ -18,7 +18,7 @@
 
     <div class="box content">
 
-        <h2 class="box-title">Add Score</h2>
+        <h2>Add Score</h2>
 
         <div class="field has-addons">
 
