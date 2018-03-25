@@ -1,0 +1,19 @@
+ip: 192.168.11.11
+memory: 2048
+cpus: 1
+provider: virtualbox
+authorize: ~/.ssh/id_rsa.pub
+keys:
+    - ~/.ssh/id_rsa
+folders:
+    -
+        map: .
+        to: /home/vagrant/code
+sites:
+    -
+        map: pub-golf.test
+        to: /home/vagrant/code/public
+databases:
+    - pubgolf
+name: pub-golf
+hostname: pub-golf
