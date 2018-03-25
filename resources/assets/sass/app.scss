@@ -35,6 +35,12 @@
     overflow-x: auto
 }
 
+hr.is-dashed {
+    border-bottom: 1px dashed #dbdbdb;
+    background-color: transparent;
+    height: 0
+}
+
 .footer {
     padding: 3rem 1.5rem
 }
