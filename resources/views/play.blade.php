@@ -22,12 +22,12 @@
         <div class="field has-addons">
 
             <div class="control is-expanded">
-                <input name="add-score" class="input is-medium" type="number" value="1" min="1" max="99">
+                <input class="input is-medium" type="number" name="add-score" value="1" min="1" max="99">
                 <p class="help">Enter the amount you did it in, the system will do the maths for you 😄</p>
             </div>
 
             <div class="control">
-                <a id="add-score-btn" class="button is-medium is-info">Add</a>
+                <a id="add-score-btn" class="button is-medium is-info">Add score</a>
             </div>
 
         </div>
@@ -56,7 +56,7 @@
                         @foreach ($holes as $hole_order => $hole)
 
                             <th>
-                                <abbr title="{{ $hole['name'] }}">{{ ++$hole_order }}</abbr>
+                                <abbr title="{{ $hole['location'] }}">{{ ++$hole_order }}</abbr>
                             </th>
 
                         @endforeach
