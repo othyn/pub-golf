@@ -25,7 +25,7 @@ mix.options(options);
 mix.sass('resources/assets/sass/app.scss', 'public/dist/css', { outputStyle: 'expanded' });
 // Sass
 
-mix.extract(['axios', 'jquery']);
+mix.extract(['axios', 'jquery', 'sweetalert']);
 // JS Vendor
 
 mix.js('resources/assets/js/app.js', 'public/dist/js');

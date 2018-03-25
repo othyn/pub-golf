@@ -17,6 +17,7 @@
     "jquery": "^3.2",
     "laravel-mix": "^2.0",
     "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0"
+    "purifycss-webpack": "^0.7.0",
+    "sweetalert": "^2.1.0"
   }
 }
