@@ -11,8 +11,7 @@
 
     <div class="notification is-fancy-font is-primary">
 
-        <p class="is-size-3">Currently at {{ $holes[$current_hole]['name'] }}, on hole {{ ++$current_hole }}</p>
-        {{-- Future self: Value for current_hole incremented for all code below. Blame laziness. --}}
+        <p class="is-size-3">Currently on hole {{ $current_hole + 1 }}. You'll need to be at {{ $holes[$current_hole]['location'] }} and ordering {{ $holes[$current_hole]['drink'] }}.</p>
 
     </div>
 
