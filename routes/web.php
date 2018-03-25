@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('join');
+    return view('home');
 });
 
 Route::get('/play', function () {
