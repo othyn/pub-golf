@@ -9,7 +9,7 @@
 
         <title>Pub Golf</title>
 
-        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="shortcut icon" href="/favicon.ico">
         <link rel="stylesheet" href="{{ CDN::mix('/dist/css/app.css') }}">
 
     </head>
