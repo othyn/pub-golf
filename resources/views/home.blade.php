@@ -17,25 +17,31 @@
 
                 <p>Join game. Get bevs. Have a laugh!</p>
 
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50">
-                        <span class="icon is-small is-left">
-                            <i class="fa fa-user fa-xs"></i>
-                        </span>
-                    </div>
-                </div>
+                <form method="POST" action="/play">
 
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input class="input is-medium" type="text" name="game_name" placeholder="ABCDEFG" maxlength="7">
-                        <span class="icon is-small is-left">
-                            <i class="fa fa-hashtag fa-xs"></i>
-                        </span>
-                    </div>
-                </div>
+                    @csrf
 
-                <button type="submit" class="button is-info is-medium is-fullwidth">Join</button>
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-user fa-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control has-icons-left">
+                            <input class="input is-medium" type="text" name="game_name" placeholder="ABCDEFG" maxlength="7">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-hashtag fa-xs"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="button is-info is-medium is-fullwidth">Join</button>
+
+                </form>
 
             </div>
 
@@ -49,7 +55,7 @@
 
                 <p>Create game. Invite friends. Get bevs. Have a laugh!</p>
 
-                <form method="post" action="/manage">
+                <form method="POST" action="/manage">
 
                     @csrf
 
