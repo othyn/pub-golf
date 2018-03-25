@@ -23,7 +23,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50">
+                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50" required>
                             <span class="icon is-small is-left">
                                 <i class="fa fa-user fa-xs"></i>
                             </span>
@@ -32,7 +32,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="game_name" placeholder="ABCDEFG" maxlength="7">
+                            <input class="input is-medium" type="text" name="game_name" placeholder="ABCDEFG" maxlength="7" required>
                             <span class="icon is-small is-left">
                                 <i class="fa fa-hashtag fa-xs"></i>
                             </span>
@@ -61,7 +61,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="game_name" placeholder="Game name" maxlength="50">
+                            <input class="input is-medium" type="text" name="game_name" placeholder="Game name" maxlength="50" required>
                             <span class="icon is-small is-left">
                                 <i class="fa fa-beer fa-xs"></i>
                             </span>
@@ -70,7 +70,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50">
+                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50" required>
                             <span class="icon is-small is-left">
                                 <i class="fa fa-user fa-xs"></i>
                             </span>
