@@ -1,154 +1,136 @@
 @extends ('layouts.master')
 
-@section ('content')
+@section ('hero-content')
 
-    <section class="hero is-info is-bold">
+    <h1 class="title is-fancy-font is-size-0">Play time</h1>
+    <h4 class="subtitle p-b-md">To invite people, send them the code below...</h4>
 
-        @include ('layouts.nav')
+    <div class="box">
 
-        <div class="hero-body">
+        <div class="field has-addons">
 
-            <div class="container">
+            <div class="control is-expanded has-icons-left">
+                <input name="game-code" class="input is-medium" type="text" value="{{ $game_code }}" readonly>
+                <span class="icon is-small is-left">
+                    <i class="fa fa-hashtag fa-xs"></i>
+                </span>
+            </div>
 
-                <h1 class="title is-fancy-font is-size-0">Play time</h1>
-                <h4 class="subtitle p-b-md">To invite people, send them the code below...</h4>
-
-                <div class="box">
-
-                    <div class="field has-addons">
-
-                        <div class="control is-expanded has-icons-left">
-                            <input name="game-code" class="input is-medium" type="text" value="{{ $game_code }}" readonly>
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-hashtag fa-xs"></i>
-                            </span>
-                        </div>
-
-                        <div class="control">
-                            <a id="game-code-btn" class="button is-medium is-info">Copy</a>
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="control">
+                <a id="game-code-btn" class="button is-medium is-info">Copy</a>
             </div>
 
         </div>
 
-    </section>
+    </div>
 
-    <section class="section">
+@endsection
 
-        <div class="container">
+@section ('main-content')
 
-            <div class="notification is-fancy-font is-primary">
+    <div class="notification is-fancy-font is-primary">
 
-                <p class="is-size-3">Currently at {{ $holes[$current_hole]['name'] }}, on hole {{ ++$current_hole }}</p>
-                {{-- Future self: Value for current_hole incremented for all code below. Blame laziness. --}}
+        <p class="is-size-3">Currently at {{ $holes[$current_hole]['name'] }}, on hole {{ ++$current_hole }}</p>
+        {{-- Future self: Value for current_hole incremented for all code below. Blame laziness. --}}
 
+    </div>
+
+    <div class="box content">
+
+        <h2 class="box-title">Add Score</h2>
+
+        <div class="field has-addons">
+
+            <div class="control is-expanded">
+                <input name="add-score" class="input is-medium" type="number" value="1" min="1" max="99">
+                <p class="help">Enter the amount you did it in, the system will do the maths for you 😄</p>
             </div>
 
-            <div class="box content">
-
-                <h2 class="box-title">Add Score</h2>
-
-                <div class="field has-addons">
-
-                    <div class="control is-expanded">
-                        <input name="add-score" class="input is-medium" type="number" value="1" min="1" max="99">
-                        <p class="help">Enter the amount you did it in, the system will do the maths for you 😄</p>
-                    </div>
-
-                    <div class="control">
-                        <a id="add-score-btn" class="button is-medium is-info">Add</a>
-                    </div>
-
-                </div>
-
+            <div class="control">
+                <a id="add-score-btn" class="button is-medium is-info">Add</a>
             </div>
 
-            <div class="box">
+        </div>
 
-                <span class="content">
+    </div>
 
-                    <h2>Leaderboard</h2>
+    <div class="box">
 
-                </span>
+        <span class="content">
 
-                <div class="table-mobile">
+            <h2>Leaderboard</h2>
 
-                    <table class="table is-striped is-fullwidth">
+        </span>
 
-                        <thead>
-                            <tr>
+        <div class="table-mobile">
 
-                                <td></td>
+            <table class="table is-striped is-fullwidth">
 
-                                <th>Hole</th>
+                <thead>
+                    <tr>
 
-                                @foreach ($holes as $hole_order => $hole)
+                        <td></td>
 
-                                    <th>
-                                        <abbr title="{{ $hole['name'] }}">{{ ++$hole_order }}</abbr>
-                                    </th>
+                        <th>Hole</th>
 
-                                @endforeach
+                        @foreach ($holes as $hole_order => $hole)
 
-                                <th>Totals</th>
+                            <th>
+                                <abbr title="{{ $hole['name'] }}">{{ ++$hole_order }}</abbr>
+                            </th>
 
-                            </tr>
+                        @endforeach
 
-                            <tr>
+                        <th>Totals</th>
 
-                                <th><abbr title="Position">Pos</abbr></th>
+                    </tr>
 
-                                <th>Par</th>
+                    <tr>
 
-                                @foreach ($holes as $hole)
+                        <th><abbr title="Position">Pos</abbr></th>
 
-                                    <th>{{ $hole['par'] }}</th>
+                        <th>Par</th>
 
-                                @endforeach
+                        @foreach ($holes as $hole)
 
-                                <th>{{ $par_total }}</th>
+                            <th>{{ $hole['par'] }}</th>
 
-                            </tr>
+                        @endforeach
 
-                        </thead>
+                        <th>{{ $par_total }}</th>
 
-                        <tbody>
+                    </tr>
 
-                            @foreach ($players as $position => $player)
+                </thead>
 
-                                <tr class="{{ $position == 0 ? 'is-selected' : '' }}">
+                <tbody>
 
-                                    <th>{{ ++$position }}</th>
+                    @foreach ($players as $position => $player)
 
-                                    <td>{{ $player['nickname'] }}</td>
+                        <tr class="{{ $position == 0 ? 'is-selected' : '' }}">
 
-                                    @foreach ($player['scores'] as $score)
+                            <th>{{ ++$position }}</th>
 
-                                        <td>{{ $score }}</td>
+                            <td>{{ $player['nickname'] }}</td>
 
-                                    @endforeach
+                            @foreach ($player['scores'] as $score)
 
-                                    <td>{{ $player['score_total'] }}</td>
-
-                                </tr>
+                                <td>{{ $score }}</td>
 
                             @endforeach
 
-                        </tbody>
+                            <td>{{ $player['score_total'] }}</td>
 
-                    </table>
+                        </tr>
 
-                </div>
+                    @endforeach
 
-            </div>
+                </tbody>
+
+            </table>
 
         </div>
 
-    </section>
+    </div>
 
 @endsection

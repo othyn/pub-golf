@@ -1,17 +1,31 @@
-<div class="hero-head">
+<section class="hero is-info is-bold @yield ('hero-size')">
 
-    <nav class="navbar">
+    <div class="hero-head">
 
-        <div class="container">
+        <nav class="navbar">
 
-            <div class="navbar-brand">
+            <div class="container">
 
-                <a class="navbar-item is-fancy-font is-size-3" href="/">🍺 Pub Golf 🏌</a>
+                <div class="navbar-brand">
+
+                    <a class="navbar-item is-fancy-font is-size-3" href="/">🍺 Pub Golf 🏌</a>
+
+                </div>
 
             </div>
 
+        </nav>
+
+    </div>
+
+    <div class="hero-body">
+
+        <div class="container">
+
+            @yield ('hero-content')
+
         </div>
 
-    </nav>
+    </div>
 
-</div>
+</section>

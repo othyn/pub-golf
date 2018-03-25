@@ -16,7 +16,21 @@
 
     <body>
 
-        @yield ('content')
+        @include ('layouts.nav')
+
+        @if (View::hasSection('main-content'))
+
+            <section class="section">
+
+                <div class="container">
+
+                    @yield ('main-content')
+
+                </div>
+
+            </section>
+
+        @endif
 
         @include ('layouts.footer')
 
