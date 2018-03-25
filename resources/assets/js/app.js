@@ -5,3 +5,5 @@
  */
 
 require('./bootstrap');
+
+require('./play.js');
