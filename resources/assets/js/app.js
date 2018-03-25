@@ -6,4 +6,4 @@
 
 require('./bootstrap');
 
-require('./play.js');
+require('./manage.js');

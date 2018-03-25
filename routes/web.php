@@ -11,14 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::view('/', 'home');
 
-Route::get('/play', function () {
+Route::get('/manage/{game_code}', function ($gameCode) {
 
     $tempData = [
-        'game_code' => 'ABCDEFG',
+        'game_code' => $gameCode
+    ];
+
+    return view('manage', $tempData);
+});
+
+Route::get('/play/{game_code}', function ($gameCode) {
+
+    $tempData = [
         'holes'     => [
             [
                 'name'  => 'Pub A',
