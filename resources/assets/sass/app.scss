@@ -13,11 +13,14 @@
 @import "positioning";
 // Positioning helpers
 
-@media screen and (max-width: 768px) {
-    .reverse-row-mobile {
-        flex-direction: row-reverse
-    }
+.reverse-row {
+    flex-direction: row-reverse
 }
+// Bulma only uses flex above mobile...
+// So, force the new game to appear on the left on desktop as its safe
+// to say the game is more likely to be created on a laptop/tablet device.
+// forcing the join game to be above on mobile which is mostly what will
+// be utilised on that device.
 
 .fancy-font {
     font-family: 'Amatic SC', cursive;
