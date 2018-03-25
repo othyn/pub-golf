@@ -49,7 +49,9 @@
 
                 <p>Create game. Invite friends. Get bevs. Have a laugh!</p>
 
-                <form method="post" action="/game">
+                <form method="post" action="/manage">
+
+                    @csrf
 
                     <div class="field">
                         <div class="control has-icons-left">
