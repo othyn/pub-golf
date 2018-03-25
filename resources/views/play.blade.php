@@ -9,9 +9,10 @@
 
 @section ('main-content')
 
-    <div class="notification is-fancy-font is-primary">
+    <div class="notification is-primary">
 
-        <p class="is-size-3">Currently on hole {{ $current_hole + 1 }}. You'll need to be at {{ $holes[$current_hole]['location'] }} and ordering {{ $holes[$current_hole]['drink'] }}.</p>
+        <h2 class="is-fancy-font is-size-3">We're on Hole {{ $current_hole + 1 }}!</h2>
+        <p>Currently at <b>{{ $holes[$current_hole]['location'] }}</b>, ordering <b>{{ $holes[$current_hole]['drink'] }}</b>.</p>
 
     </div>
 
@@ -23,7 +24,7 @@
 
             <div class="control is-expanded">
                 <input class="input is-medium" type="number" name="add-score" value="1" min="1" max="99">
-                <p class="help">Enter the amount you did it in, the system will do the maths for you 😄</p>
+                <p class="help">Enter the amount you did it in, the system will do the golf maths for you 😄</p>
             </div>
 
             <div class="control">
