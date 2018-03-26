@@ -49,7 +49,10 @@ define('TEMP_players', [
 
 Route::view('/', 'home');
 
-Route::get('/join/{game_code}', function ($gameCode) {
+Route::get('/join/{game}', 'JoinController@index');
+Route::post('/join/{game}', 'JoinController@store');
+
+Route::post('/manage', function () {
 
     $str = "";
 
@@ -63,14 +66,7 @@ Route::get('/join/{game_code}', function ($gameCode) {
         $str .= $characters[$rand];
     }
 
-    dd($str);
-
-    // Allows people to share the game easily
-
-    return view('join', ['game_code' => $gameCode]);
-});
-
-Route::post('/manage', function () {
+    // dd($str);
 
     // Create new unique game
     // Create new player for game using nickname and assign them as admin
