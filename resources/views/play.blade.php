@@ -28,7 +28,7 @@
             </div>
 
             <div class="control">
-                <a id="add-score-btn" class="button is-medium is-info">Add score</a>
+                <a id="add-score-btn" class="button is-medium is-info">Add / Change score</a>
             </div>
 
         </div>
