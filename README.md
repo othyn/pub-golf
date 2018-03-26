@@ -1,6 +1,8 @@
 # pub-golf
 Basic web app for pub golf games
 
+In it's current state, the project isn't designed to be fully secure - in the meaning that, if you are lucky enough to guess both a game code and username, you can play as another user. Requests are validated so that users cannot easily stray outside of the scope of a game, but I'm not too fussed if they stumble across another game code randomly and create a user onto it. It's only meant to be a silly side project which serves its purpose enough, using obscurity with a high degree of randomness at this point is fine. I'll start to look at a user system (laravel's auth handler) as a possible expansion, which can bring other benefits such as game history, manage saved games, etc. but it's not necessary. Simple user in session; user remembers the game code and name to re-join should be fine for the scope & role of the project.
+
 ## Setup
 The project runs using a self contained instance of Homestead, mainly for multiplatform support and hey, I like vagrant. [Instructions on installation and setup](https://laravel.com/docs/5.6/homestead), and more specifically the [per-project installation](https://laravel.com/docs/5.6/homestead#per-project-installation) are on Laravel's website, although I'll cover the step-by-step process below for getting this up and running for this project. I'm also using this as an excuse to explore [Bulma](https://bulma.io/), as it looks like a fun, lightweight and stylish CSS framework. For the initial version, just to get a PoC going, its just raw JS/jQuery - although I plan to migrate this to Vue and look into a socket/event based API.
 
