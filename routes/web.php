@@ -49,6 +49,27 @@ define('TEMP_players', [
 
 Route::view('/', 'home');
 
+Route::get('/join/{game_code}', function ($gameCode) {
+
+    $str = "";
+
+    $characters = range('A','Z');
+
+    $max = count($characters) - 1;
+
+    for ($i = 0; $i < 7; ++$i) {
+
+        $rand = mt_rand(0, $max);
+        $str .= $characters[$rand];
+    }
+
+    dd($str);
+
+    // Allows people to share the game easily
+
+    return view('join', ['game_code' => $gameCode]);
+});
+
 Route::post('/manage', function () {
 
     // Create new unique game
