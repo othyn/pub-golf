@@ -13,13 +13,15 @@
 
         <p>Join game. Get bevs. Have a laugh!</p>
 
-        <form method="POST" action="/play">
+        @include ('layouts.errors')
+
+        <form method="POST" action="/join/{{ $game_code }}">
 
             @csrf
 
             <div class="field">
                 <div class="control has-icons-left">
-                    <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" maxlength="50" required>
+                    <input class="input is-medium" type="text" name="name" placeholder="Your nickname" minlength="1" maxlength="50" required>
                     <span class="icon is-small is-left">
                         <i class="fa fa-user fa-xs"></i>
                     </span>
