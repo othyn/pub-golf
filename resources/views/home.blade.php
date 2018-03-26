@@ -32,7 +32,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="game_name" placeholder="ABCDEFG" maxlength="7" required>
+                            <input class="input is-medium" type="text" name="game_code" placeholder="ABCDEFG" maxlength="7" required>
                             <span class="icon is-small is-left">
                                 <i class="fa fa-hashtag fa-xs"></i>
                             </span>
