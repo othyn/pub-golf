@@ -17,7 +17,7 @@
             </div>
 
             <div class="control">
-                <a id="game-code-btn" class="button is-medium is-info">Copy</a>
+                <a id="game-code-btn" class="button is-medium is-info">Copy link</a>
             </div>
 
         </div>

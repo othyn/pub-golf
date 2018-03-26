@@ -2,11 +2,15 @@ import swal from 'sweetalert';
 
 $('#game-code-btn').on('click', function() {
 
-    $('[name=game-code]').select();
+    var $temp = $('<input>');
 
-    document.execCommand('Copy');
+    $('body').append($temp);
 
-    window.getSelection().removeAllRanges();
+    $temp.val('https://pub-golf.othyn.com/join/' + $('[name=game-code]').val()).select();
+
+    document.execCommand('copy');
+
+    $temp.remove();
 
     $(this).removeClass('is-info')
            .addClass('is-success')
