@@ -86,84 +86,6 @@
 
     <div class="box content">
 
-        <h2>Penalise Player</h2>
-
-        <p>Set the current active hole for all players. This is what all the scores will then be placed against that they submit, and the information on their score card will reflect the hole information.</p>
-
-        <hr class="is-dashed">
-
-        <a id="penalise-player-btn" class="button is-medium is-primary is-fullwidth">Penalise player</a>
-
-        <section id="swal-penalise-content-template" style="display: none">
-
-            <form class="penalise-player">
-
-                <div class="field is-horizontal">
-
-                    <div class="field-label is-normal">
-                        <label class="label">Player</label>
-                    </div>
-
-                    <div class="field-body">
-                        <div class="field">
-
-                            <p class="control is-expanded has-icons-left">
-
-                                <span class="select is-fullwidth">
-                                    <select name="penalise_chosen_player">
-
-                                        @foreach ($players as $position => $player)
-
-                                            <option value="{{ $position }}">
-                                                {{ $player['nickname'] }} - {{ $player['score_total'] }}
-                                            </option>
-
-                                        @endforeach
-
-                                    </select>
-                                </span>
-
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-user"></i>
-                                </span>
-
-                            </p>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="field is-horizontal">
-
-                    <div class="field-label is-normal">
-                        <label class="label">Points</label>
-                    </div>
-
-                    <div class="field-body">
-                        <div class="field">
-
-                            <div class="control is-expanded has-icons-left">
-                                <input class="input" type="number" name="penalise_points" value="2" min="1" max="100" required>
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-plus fa-xs"></i>
-                                </span>
-                                <p class="help">Highest score loses, so get adding points!</p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </form>
-
-        </section>
-
-    </div>
-
-    <div class="box content">
-
         <h2>General Bits</h2>
 
         <p>Stuff for the game itself. Bits like name, number of players, etc...</p>
@@ -259,16 +181,16 @@
 
                     <tr>
 
-                        <td>{{ ($hole_order + 1) }}</td>
+                        <td>{{ ++$hole_order }}</td>
                         <td>{{ $hole['location'] }}</td>
                         <td>{{ $hole['drink'] }}</td>
                         <td>{{ $hole['par'] }}</td>
 
                         <td class="has-text-centered">
-                            <a class="button is-small is-info edit-hole-btn" data-ref="{{ $hole_order }}">
+                            <a class="button is-small is-info edit-hole-btn" data-ref="{{ $hole['uuid'] }}" data-location="{{ $hole['location'] }}">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a class="button is-small is-danger delete-hole-btn" data-ref="{{ $hole_order }}">
+                            <a class="button is-small is-danger delete-hole-btn" data-ref="{{ $hole['uuid'] }}" data-location="{{ $hole['location'] }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             {{-- Implement  --}}
@@ -344,6 +266,81 @@
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-star fa-xs"></i>
                                 </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+    <div class="box content">
+
+        <h2>Players</h2>
+
+        <p>These are the players currently playing in the game.</p>
+
+        <hr class="is-dashed">
+
+        <table class="table is-striped is-fullwidth">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="has-text-centered"><i class="fa fa-wrench"></i></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach ($players as $player)
+
+                    <tr>
+
+                        <td>{{ $player['name'] }}</td>
+
+                        <td class="has-text-centered">
+                            <a class="button is-small is-warning penalise-player-btn" data-ref="{{ $player['uuid'] }}" data-name="{{ $player['name'] }}">
+                                <i class="fa fa-flag"></i>
+                            </a>
+                            <a class="button is-small is-danger delete-player-btn" data-ref="{{ $player['uuid'] }}" data-name="{{ $player['name'] }}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            {{-- Implement  --}}
+                        </td>
+
+                    </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+        <section id="swal-player-content-template" style="display: none">
+
+            <form class="player-penalise">
+
+                <div class="field is-horizontal">
+
+                    <div class="field-label is-normal">
+                        <label class="label">Points</label>
+                    </div>
+
+                    <div class="field-body">
+                        <div class="field">
+
+                            <div class="control is-expanded has-icons-left">
+                                <input class="input" type="number" name="penalise_points" value="2" min="1" max="100" required>
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-plus fa-xs"></i>
+                                </span>
+                                <p class="help">Highest score loses, so get adding points!</p>
                             </div>
 
                         </div>
