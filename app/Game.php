@@ -11,6 +11,49 @@ use App\PlayerScore;
 class Game extends Model {
 
     /**
+     * Whitelist of fields to allow mass assignment
+     * @var array
+     */
+    protected $fillable = ['name', 'admin_player_id'];
+
+    /**
+     * The "booting" method of the model.
+     * @return void
+     */
+    public static function boot() {
+
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->game_code = self::generateGameCode();
+        });
+        // Auto generate game code into game_code DB field upon create
+    }
+
+    /**
+     * Generates a unique game code for the game
+     * WARN - Can be DB heavy
+     * @return string   Generated 7 char game code
+     */
+    private static function generateGameCode() {
+
+        $gameCode = '';
+
+        $characters = range('A', 'Z');
+
+        $maxCharacters = count($characters) - 1;
+
+        for ($i = 0; $i < 7; ++$i) {
+
+            $randomIndex = mt_rand(0, $maxCharacters);
+
+            $gameCode .= $characters[$randomIndex];
+        }
+
+        return $gameCode;
+    }
+
+    /**
      * DOCS: Route Model Binding > Implicit Binding > Customizing The Key Name
      * Allows overriding of the default database column to use on binding instead of 'id'
      * @return string   DB column name
