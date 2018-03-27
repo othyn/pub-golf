@@ -20,8 +20,6 @@ class GameController extends Controller {
             'organiser_name' => 'required|min:1|max:50'
         ]);
 
-        $game = Game::create(request(['name']));
-
         /*
             try {
 
@@ -39,8 +37,9 @@ class GameController extends Controller {
             }
             TODO: Need to account for duplicates
             Would do a while on DB check or something similar...
-         */
+        */
 
+        $game = Game::create(request(['name']));
 
         $player = $game->addPlayer(request('organiser_name'));
 
@@ -49,6 +48,7 @@ class GameController extends Controller {
         $game->save();
 
         $request->session()->put('player_id', $player->id);
+        // Set what player the user is using
 
         return redirect()->route('game.edit', [$game]);
     }
@@ -80,7 +80,7 @@ class GameController extends Controller {
         $player = $game->addPlayer(request('name'));
 
         $request->session()->put('player_id', $player->id);
-        // Set the game
+        // Set what player the user is using
 
         return redirect()->route('game.play', compact('game'));
     }
