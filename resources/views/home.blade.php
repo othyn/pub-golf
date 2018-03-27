@@ -19,13 +19,13 @@
 
                 <p>Join game. Get bevs. Have a laugh!</p>
 
-                <form id="join-form" method="POST" action="/join">
+                <form id="join-form" method="POST" action="/game/join">
 
                     @csrf
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="name" placeholder="Your nickname" minlength="1" maxlength="50" required>
+                            <input class="input is-medium" type="text" name="name" placeholder="Your nickname" minlength="1" maxlength="50" required autocomplete="off">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-user fa-xs"></i>
                             </span>
@@ -34,7 +34,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="game_code" placeholder="BARTMAN" minlength="7" maxlength="7" required>
+                            <input class="input is-medium" type="text" name="game_code" placeholder="BARTMAN" minlength="7" maxlength="7" required autocomplete="off">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-hashtag fa-xs"></i>
                             </span>
@@ -57,13 +57,13 @@
 
                 <p>Create game. Invite friends. Get bevs. Have a laugh!</p>
 
-                <form method="POST" action="/manage">
+                <form method="POST" action="/game/create">
 
                     @csrf
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="name" placeholder="Game name" minlength="5" maxlength="50" required>
+                            <input class="input is-medium" type="text" name="name" placeholder="Game name" minlength="1" maxlength="50" required autocomplete="off">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-beer fa-xs"></i>
                             </span>
@@ -72,7 +72,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" minlength="1" maxlength="50" required>
+                            <input class="input is-medium" type="text" name="organiser_name" placeholder="Your nickname" minlength="1" maxlength="50" required autocomplete="off">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-user fa-xs"></i>
                             </span>
