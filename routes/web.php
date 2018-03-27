@@ -74,7 +74,7 @@ Route::post('/manage', function () {
     return view('manage');
 });
 
-Route::get('/manage/{game_code}', function ($gameCode) {
+Route::get('/manage/{game}', function ($gameCode) {
 
     $tempData = [
         'game_code'   => $gameCode,
@@ -97,7 +97,7 @@ Route::post('/play', function () {
     return view('play');
 });
 
-Route::get('/play/{game_code}', function ($gameCode) {
+Route::get('/play/{game}', function ($gameCode) {
 
     $tempData = [
         'game_name'    => 'Test game name',
