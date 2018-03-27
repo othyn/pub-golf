@@ -2,5 +2,5 @@ require('./bootstrap');
 // Dependency loading
 
 require('./home.js');
-require('./manage.js');
+require('./edit.js');
 // App stuff

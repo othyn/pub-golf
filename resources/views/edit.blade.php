@@ -2,7 +2,7 @@
 
 @section ('hero-content')
 
-    <h1 class="title is-fancy-font is-size-0">Manage game</h1>
+    <h1 class="title is-fancy-font is-size-0">Edit game</h1>
     <h4 class="subtitle p-b-md">To invite people to play, send them the code below...</h4>
 
     <div class="box">
