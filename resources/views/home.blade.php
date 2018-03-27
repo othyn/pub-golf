@@ -63,7 +63,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="game_name" placeholder="Game name" minlength="5" maxlength="50" required>
+                            <input class="input is-medium" type="text" name="name" placeholder="Game name" minlength="5" maxlength="50" required>
                             <span class="icon is-small is-left">
                                 <i class="fa fa-beer fa-xs"></i>
                             </span>
