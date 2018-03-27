@@ -93,9 +93,10 @@ class Game extends Model {
     /**
      * Add a player to a game
      * @param string $name player name
+     * @return Player      Created player instance
      */
     public function addPlayer($name) {
 
-        $this->players()->create(compact('name'));
+        return $this->players()->create(compact('name'));
     }
 }
