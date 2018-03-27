@@ -6,7 +6,7 @@ $('#game-code-btn').on('click', function() {
 
     $('body').append($temp);
 
-    $temp.val('https://pub-golf.othyn.com/join/' + $('[name=game-code]').val()).select();
+    $temp.val('https://pub-golf.othyn.com/game/join/' + $('[name=game-code]').val()).select();
 
     document.execCommand('copy');
 
