@@ -10,9 +10,10 @@ class GameController extends Controller {
 
     /**
      * Handles game creation
-     * @return void
+     *
+     * @return RedirectResponse     Play RedirectResponse
      */
-    public function create() {
+    public function create(Request $request) {
 
         $this->validate(request(), [
             'name'           => 'required|min:1|max:50',
@@ -21,22 +22,25 @@ class GameController extends Controller {
 
         $game = Game::create(request(['name']));
 
-        // try {
+        /*
+            try {
 
-        //     $game->create([
-        //         'name'            => request('name'),
-        //         'admin_player_id' => 0
-        //     ]);
+                $game->create([
+                    'name'            => request('name'),
+                    'admin_player_id' => 0
+                ]);
 
-        // } catch (Illuminate\Database\QueryException $e) {
+            } catch (Illuminate\Database\QueryException $e) {
 
-        //     $errorCode = $e->errorInfo[1];
+                $errorCode = $e->errorInfo[1];
 
-        //     if ($errorCode == 1062)
-        //         return back(); // Needs errors
-        // }
-        // TODO: Need to account for duplicates
-        // Would do a while on DB check or something similar...
+                if ($errorCode == 1062)
+                    return back(); // Needs errors
+            }
+            TODO: Need to account for duplicates
+            Would do a while on DB check or something similar...
+         */
+
 
         $player = $game->addPlayer(request('organiser_name'));
 
@@ -44,24 +48,32 @@ class GameController extends Controller {
 
         $game->save();
 
-        // Add player to session
         // Create middleware to check for ID in session on
-        // play & manage?
 
-        // Redirect to ManageController@index with game obj
+        $request->session()->put('player_id', $player->id);
 
         return redirect()->route('game.edit', [$game]);
-
-        //return view('manage', ['game_code' => $game->game_code]);
     }
 
     /**
-     * Verifies game exists, created a player for the game,
-     * then dumps the player at the scorecard
-     * @param  Game   $game Game model instance
-     * @return void
+     * Landing handling for /game/join/{game}
+     *
+     * @param  Game   $game Game instance
+     * @return View         Join View instance
      */
-    public function join(Game $game) {
+    public function showJoin(Game $game) {
+
+        return view('join', compact('game'));
+    }
+
+    /**
+     * Creates a player onto a game
+     * Then sends the newly created player to play the game
+     *
+     * @param  Game             $game   Game model instance
+     * @return RedirectResponse         Play RedirectResponse
+     */
+    public function join(Request $request, Game $game) {
 
         $this->validate(request(), [
             'name' => 'required|min:1|max:50'
@@ -69,14 +81,114 @@ class GameController extends Controller {
 
         $player = $game->addPlayer(request('name'));
 
-        // Add player to session
         // Create middleware to check for ID in session on
-        // play & manage?
 
-        // Redirect to PlayController@index
+        $request->session()->put('player_id', $player->id);
 
-        return back();
+        return redirect()->route('game.play', compact('game'));
+    }
 
-        //return view('play', ['game_code' => $game->game_code]);
+    /**
+     * Let's play a game!
+     * Limited to players of the game only
+     *
+     * @param  Game   $game Game instance
+     * @return View         Play View instance
+     */
+    public function play(Game $game) {
+
+        $tempData = [
+            'name'         => 'Test game name',
+            'current_hole' => 1,
+            'par_total'    => 10,
+            'holes'        => [
+                [
+                    'location' => 'Pub A',
+                    'drink'    => 'Shots',
+                    'par'      => 3
+                ],
+                [
+                    'location' => 'Pub B',
+                    'drink'    => 'Water',
+                    'par'      => 7
+                ]
+            ],
+            'players'      => [
+                [
+                    'nickname'    => 'Jess',
+                    'scores'      => [2, 3],
+                    'score_total' => 5
+                ],
+                [
+                    'nickname'    => 'Jill',
+                    'scores'      => [3, 5],
+                    'score_total' => 8
+                ],
+                [
+                    'nickname'    => 'Bob',
+                    'scores'      => [1, 8],
+                    'score_total' => 9
+                ],
+                [
+                    'nickname'    => 'Mark',
+                    'scores'      => [4, 7],
+                    'score_total' => 11
+                ],
+            ]
+        ];
+
+        return view('play', compact('game'));
+    }
+
+    /**
+     * Edit the game
+     * Limited to admins of the game only
+     *
+     * @param  Game   $game Game instance to manage
+     * @return View         Edit View instance
+     */
+    public function edit(Game $game) {
+
+        $tempData = [
+            'game_code'   => $gameCode,
+            'name'        => 'Test game name',
+            'max_players' => 10,
+            'holes'       => [
+                [
+                    'location' => 'Pub A',
+                    'drink'    => 'Shots',
+                    'par'      => 3
+                ],
+                [
+                    'location' => 'Pub B',
+                    'drink'    => 'Water',
+                    'par'      => 7
+                ]
+            ],
+            'players'     => [
+                [
+                    'nickname'    => 'Jess',
+                    'scores'      => [2, 3],
+                    'score_total' => 5
+                ],
+                [
+                    'nickname'    => 'Jill',
+                    'scores'      => [3, 5],
+                    'score_total' => 8
+                ],
+                [
+                    'nickname'    => 'Bob',
+                    'scores'      => [1, 8],
+                    'score_total' => 9
+                ],
+                [
+                    'nickname'    => 'Mark',
+                    'scores'      => [4, 7],
+                    'score_total' => 11
+                ],
+            ]
+        ];
+
+        return view('edit', compact('game'));
     }
 }
