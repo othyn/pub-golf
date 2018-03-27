@@ -2,7 +2,7 @@
 
 @section ('hero-content')
 
-    <h1 class="title is-fancy-font is-size-0">{{ $game_name }}</h1>
+    <h1 class="title is-fancy-font is-size-0">{{ $name }}</h1>
     <h4 class="subtitle p-b-md">Keep your score &amp; see how the game's going...</h4>
 
 @endsection

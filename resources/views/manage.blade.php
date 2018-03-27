@@ -186,7 +186,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="text" name="game_name" value="{{ $game_name }}" placeholder="Pub Golf #1" maxlength="50" required>
+                                <input class="input" type="text" name="name" value="{{ $name }}" placeholder="Pub Golf #1" minlength="5" maxlength="50" required>
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-beer fa-xs"></i>
                                 </span>

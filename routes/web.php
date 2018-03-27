@@ -11,6 +11,10 @@
 |
 */
 
+// TODO: Rate limiting
+// - https://laravel.com/docs/5.6/routing#rate-limiting
+// - https://scotch.io/tutorials/understanding-laravel-middleware
+
 define('TEMP_holes', [
     [
         'location' => 'Pub A',
@@ -49,9 +53,6 @@ define('TEMP_players', [
 
 Route::view('/', 'home');
 
-Route::get('/join/{game}', 'JoinController@index');
-Route::post('/join/{game}', 'JoinController@store');
-
 Route::post('/manage', function () {
 
     $str = "";
@@ -78,7 +79,7 @@ Route::get('/manage/{game}', function ($gameCode) {
 
     $tempData = [
         'game_code'   => $gameCode,
-        'game_name'   => 'Test game name',
+        'name'        => 'Test game name',
         'max_players' => 10,
         'holes'       => TEMP_holes,
         'players'     => TEMP_players
@@ -86,6 +87,9 @@ Route::get('/manage/{game}', function ($gameCode) {
 
     return view('manage', $tempData);
 });
+
+Route::get('/join/{game}', 'JoinController@index');
+Route::post('/join/{game}', 'JoinController@store');
 
 Route::post('/play', function () {
 
@@ -100,7 +104,7 @@ Route::post('/play', function () {
 Route::get('/play/{game}', function ($gameCode) {
 
     $tempData = [
-        'game_name'    => 'Test game name',
+        'name'         => 'Test game name',
         'current_hole' => 1,
         'par_total'    => 10,
         'holes'        => TEMP_holes,
