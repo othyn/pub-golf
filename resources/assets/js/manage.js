@@ -91,3 +91,32 @@ $('.delete-hole-btn').on('click', function() {
     });
     //TODO: Do ajax endpointy stuff
 });
+
+$('.penalise-player-btn').on('click', function() {
+
+    let $swalContent = $('#swal-player-content-template').clone().css({'display': 'block'})
+      , player       = $(this).data('ref')
+      , playerName   = $(this).data('name');
+
+    swal({
+        title: `Penalise ${playerName}`,
+        content: $swalContent[0],
+        buttons: [true, 'Send them down!']
+    });
+    //TODO: Do ajax endpointy stuff
+});
+
+$('.delete-player-btn').on('click', function() {
+
+    let player     = $(this).data('ref')
+      , playerName = $(this).data('name');
+
+    swal({
+        title: `Delete ${playerName}?`,
+        text: 'This will permanently delete the player and their score. This is action not recoverable. Continue?',
+        icon: 'warning',
+        buttons: ['Hell no!', 'Yes, delete them'],
+        dangerMode: true,
+    });
+    //TODO: Do ajax endpointy stuff
+});
