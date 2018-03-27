@@ -11,11 +11,14 @@
 |
 */
 
-// TODO: Rate limiting
-// - https://laravel.com/docs/5.6/routing#rate-limiting
+// TODO: Middleware for session user ID check on Web & API
+// - https://laravel.com/docs/5.6/session
+// - https://laravel.com/docs/5.6/middleware
 // - https://scotch.io/tutorials/understanding-laravel-middleware
 //
-// TODO: Middleware for session user ID check
+// TODO: Rate limiting for the above
+// - https://laravel.com/docs/5.6/routing#rate-limiting
+// - https://scotch.io/tutorials/understanding-laravel-middleware
 
 /**
  * Landing routes

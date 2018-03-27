@@ -48,8 +48,6 @@ class GameController extends Controller {
 
         $game->save();
 
-        // Create middleware to check for ID in session on
-
         $request->session()->put('player_id', $player->id);
 
         return redirect()->route('game.edit', [$game]);
@@ -81,9 +79,8 @@ class GameController extends Controller {
 
         $player = $game->addPlayer(request('name'));
 
-        // Create middleware to check for ID in session on
-
         $request->session()->put('player_id', $player->id);
+        // Set the game
 
         return redirect()->route('game.play', compact('game'));
     }
@@ -96,6 +93,11 @@ class GameController extends Controller {
      * @return View         Play View instance
      */
     public function play(Game $game) {
+
+        // TODO: Middleware?
+        // - Has user in session
+        // - Is valid on game for user in session
+        // - Game is open to play (needs Holes)
 
         $tempData = [
             'name'         => 'Test game name',
@@ -148,6 +150,11 @@ class GameController extends Controller {
      * @return View         Edit View instance
      */
     public function edit(Game $game) {
+
+        // TODO: Middleware?
+        // - Has user in session
+        // - Is valid on game for user in session
+        // - User is admin for game
 
         $tempData = [
             'game_code'   => $gameCode,
