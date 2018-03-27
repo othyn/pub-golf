@@ -29,18 +29,6 @@ $('#active-hole-btn').on('click', function() {
     //TODO: Do ajax endpointy stuff
 });
 
-$('#penalise-player-btn').on('click', function() {
-
-    let $swalContent = $('#swal-penalise-content-template').clone().css({'display': 'block'});
-
-    swal({
-        title: 'Penalise player',
-        content: $swalContent[0],
-        buttons: [true, 'Send them down!']
-    });
-    //TODO: Do ajax endpointy stuff
-});
-
 $('#edit-game-btn').on('click', function() {
 
     let $swalContent = $('#swal-edit-game-content-template').clone().css({'display': 'block'});
