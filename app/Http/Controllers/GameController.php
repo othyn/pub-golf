@@ -19,13 +19,38 @@ class GameController extends Controller {
             'organiser_name' => 'required|min:1|max:50'
         ]);
 
-        $game = Game::create([request('name')]);
+        $game = Game::create(request(['name']));
 
-        $game->addPlayer(request('organiser_name'));
+        // try {
+
+        //     $game->create([
+        //         'name'            => request('name'),
+        //         'admin_player_id' => 0
+        //     ]);
+
+        // } catch (Illuminate\Database\QueryException $e) {
+
+        //     $errorCode = $e->errorInfo[1];
+
+        //     if ($errorCode == 1062)
+        //         return back(); // Needs errors
+        // }
+        // TODO: Need to account for duplicates
+        // Would do a while on DB check or something similar...
+
+        $player = $game->addPlayer(request('organiser_name'));
+
+        $game->admin_player_id = $player->id;
+
+        $game->save();
+
+        // Add player to session
+        // Create middleware to check for ID in session on
+        // play & manage?
 
         // Redirect to ManageController@index with game obj
 
-        return back();
+        return redirect()->route('game.edit', [$game]);
 
         //return view('manage', ['game_code' => $game->game_code]);
     }
@@ -42,7 +67,11 @@ class GameController extends Controller {
             'name' => 'required|min:1|max:50'
         ]);
 
-        $game->addPlayer(request('name'));
+        $player = $game->addPlayer(request('name'));
+
+        // Add player to session
+        // Create middleware to check for ID in session on
+        // play & manage?
 
         // Redirect to PlayController@index
 
