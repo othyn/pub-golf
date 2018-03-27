@@ -1,6 +1,6 @@
 @if (count($errors))
 
-    <div class="notification is-danger">
+    <div class="notification is-danger content">
 
         There appears to be a few errors... 😭
 
