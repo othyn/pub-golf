@@ -15,7 +15,7 @@
 
         @include ('layouts.errors')
 
-        <form method="POST" action="/game/join/{{ $game_code }}">
+        <form method="POST" action="/game/join/{{ $game->game_code }}">
 
             @csrf
 
@@ -30,7 +30,7 @@
 
             <div class="field">
                 <div class="control has-icons-left">
-                    <input class="input is-medium" type="text" value="{{ $game_code }}" disabled>
+                    <input class="input is-medium" type="text" value="{{ $game->game_code }}" disabled>
                     <span class="icon is-small is-left">
                         <i class="fa fa-hashtag fa-xs"></i>
                     </span>
