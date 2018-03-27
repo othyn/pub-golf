@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Uuid;
 
+use App\Game;
 use App\PlayerScore;
 
 class Player extends Model {
@@ -31,8 +32,17 @@ class Player extends Model {
     }
 
     /**
+     * Player relationship to Game
+     * @return Collection   Parent Game for the Player
+     */
+    public function game() {
+
+        return $this->belongsTo(Game::class);
+    }
+
+    /**
      * Player relationship to PlayerScore
-     * @return Collection   PlayerScores attached to the player
+     * @return Collection   PlayerScores attached to the Player
      */
     public function scores() {
 
