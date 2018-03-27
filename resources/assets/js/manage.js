@@ -56,10 +56,11 @@ $('#create-hole-btn').on('click', function() {
 $('.edit-hole-btn').on('click', function() {
 
     let $swalContent = $('#swal-hole-content-template').clone().css({'display': 'block'})
-      , holeNumber   = $(this).data('ref');
+      , hole         = $(this).data('ref')
+      , holeLocation = $(this).data('location');
 
     swal({
-        title: 'Edit hole ' + (holeNumber + 1),
+        title: `Edit ${holeLocation}`,
         content: $swalContent[0],
         buttons: [true, 'Save changes']
     });
@@ -68,10 +69,11 @@ $('.edit-hole-btn').on('click', function() {
 
 $('.delete-hole-btn').on('click', function() {
 
-    let holeNumber = $(this).data('ref');
+    let hole         = $(this).data('ref')
+      , holeLocation = $(this).data('location');
 
     swal({
-        title: 'Delete hole ' + (holeNumber + 1) + '?',
+        title: `Delete ${holeLocation}?`,
         text: 'This will permanently delete the hole, with all associated scores and data. This is action not recoverable. Continue?',
         icon: 'warning',
         buttons: ['Hell no!', 'Yes, delete the hole'],
