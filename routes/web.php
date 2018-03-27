@@ -51,39 +51,28 @@ define('TEMP_players', [
     ],
 ]);
 
-Route::view('/', 'home');
+/**
+ * Landing route
+ */
 
-Route::post('/game/create', 'GameController@create');
+Route::view('/', 'home')->name('home');
+
+
+/**
+ * Game routes
+ */
+
+Route::post('/game/create', 'GameController@create')->name('game.create');
 
 Route::get('/game/join/{game}', function (Game $game) {
 
     return view('join', ['game_code' => $game->game_code]);
-});
+
+})->name('game.join');
 
 Route::post('/game/join/{game}', 'GameController@join');
 
-Route::get('/game/manage/{game}', function ($gameCode) {
-
-    $tempData = [
-        'game_code'   => $gameCode,
-        'name'        => 'Test game name',
-        'max_players' => 10,
-        'holes'       => TEMP_holes,
-        'players'     => TEMP_players
-    ];
-
-    return view('manage', $tempData);
-});
-
-Route::post('/game/play', function () {
-
-    // Check game exists
-    // Create player for game from nickname if doesnt exist
-    // Load existing if does
-    // Goto play page
-
-    return view('play');
-});
+Route::get('/game/edit/{game}', 'GameController@edit')->name('game.edit');
 
 Route::get('/game/play/{game}', function ($gameCode) {
 
@@ -96,4 +85,4 @@ Route::get('/game/play/{game}', function ($gameCode) {
     ];
 
     return view('play', $tempData);
-});
+})->name('game.play');
