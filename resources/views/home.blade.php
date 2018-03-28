@@ -7,7 +7,7 @@
     <h1 class="title is-fancy-font is-size-0">Time to tee off!</h1>
     <h4 class="subtitle p-b-md">To begin, create or join a game...</h4>
 
-    @include ('layouts.errors')
+    @include ('partials.errors')
 
     <div class="tile is-ancestor reverse-row">
 
