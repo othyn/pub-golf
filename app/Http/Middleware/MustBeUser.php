@@ -16,13 +16,13 @@ class MustBeUser {
     public function handle($request, Closure $next) {
 
         if (!$request->session()->has('player_id'))
-            return redirect('/');
+            abort(404);
         // User doesn't have a player in the session yet
 
         $playerID = $request->session()->get('player_id');
 
         if (!$request->game->players()->where('id', $playerID)->exists())
-            return redirect('/');
+            abort(404);
         // The session player isn't on this game
 
         if (!$request->game->has('holes')->exists() && $request->segment(2) != 'edit') {

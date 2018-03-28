@@ -22,7 +22,7 @@ class MustBeAdmin
         $adminPlayer = $request->game->adminPlayer();
 
         if (!$adminPlayer || $adminPlayer->id != $playerID)
-            return redirect('/');
+            abort(404);
         // The session player isn't the admin for this game
 
         return $next($request);
