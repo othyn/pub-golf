@@ -78,18 +78,25 @@ class GameController extends Controller {
             'name' => 'required|min:1|max:50'
         ]);
 
-        if ($game->players()->count() >= $game->max_players) {
+        if (!$player = $game->players()->where('name', request('name'))->first()) {
 
-            $request->session()->flash('message.warning', 'Sorry, this game has run out of available spaces. 😭 Ask your fun coordinator to add more!');
+            // If a player doesn't already exist for this game...
 
-            return redirect('/');
+            if ($game->players()->count() >= $game->max_players) {
+
+                $request->session()->flash('message.warning', 'Sorry, this game has run out of available spaces. 😭 Ask your fun coordinator to add more!');
+
+                return redirect('/');
+            }
+            // ... check that there are available spaces ...
+
+            $player = $game->players()->create([
+                'name' => request('name')
+            ]);
+            // ... and create the game
+            // Being careful with mass assignment of is_admin to explicitly build
+            // the data array
         }
-
-        $player = $game->players()->firstOrCreate([
-            'name' => request('name')
-        ]);
-        // Careful with mass assignment of is_admin to explicitly build
-        // the data array
 
         $request->session()->put('player_id', $player->id);
         // Set what player the user is using
