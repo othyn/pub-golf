@@ -8,6 +8,7 @@
     <h4 class="subtitle p-b-md">To begin, create or join a game...</h4>
 
     @include ('partials.errors')
+    @include ('partials.flash-warning')
 
     <div class="tile is-ancestor reverse-row">
 
