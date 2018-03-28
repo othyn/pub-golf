@@ -50,17 +50,12 @@ $('#submit-score-btn').on('click', function() {
     })
     .then((response) => {
 
-        swal('Woop 🎉', 'Your par score for this hole is ' + response.data.score, 'success');
-
-        $('#active-score').text(response.data.score);
-        $('#total-score').text(response.data.total);
-        // Vue would come in real handy right about now...
-
-        $('[name=score]').val(0);
+        swal('Woop 🎉', `Your par score for this hole is ${response.data.score}`, 'success');
 
     })
     .catch((error) => {
 
         swal('Uh-oh 😨', 'There was a problem submitting your score, try again in a minute.', 'error');
+        // TODO: Could do with displaying validation errors
     });
 });
