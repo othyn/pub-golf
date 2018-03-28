@@ -9,7 +9,7 @@
 
 @section ('main-content')
 
-    @if (session('player_id') == $player->id)
+    @if (session('player_id') == $game->adminPlayer()->id)
 
         <a href="/game/edit/{{ $game->code }}" class="button is-large is-fullwidth is-info m-b-lg">Edit game</a>
         <!-- TODO: Push to top right of page, in nav style -->
