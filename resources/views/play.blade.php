@@ -30,12 +30,12 @@
         <div class="field has-addons">
 
             <div class="control is-expanded">
-                <input class="input is-medium" type="number" name="add-score" value="1" min="1" max="99">
+                <input class="input is-medium" type="number" name="score" value="1" min="0" max="100">
                 <p class="help">Enter the amount you did it in, the system will do the golf maths for you 😄</p>
             </div>
 
             <div class="control">
-                <a id="add-score-btn" class="button is-medium is-info">Add / Change score</a>
+                <button type="button" id="submit-score-btn" class="button is-medium is-info" data-game="{{ $game->code }}" data-player="{{ $player->uuid }}">Submit score</button>
             </div>
 
         </div>

@@ -18,8 +18,8 @@ class CreatePlayerScoresTable extends Migration
             $table->integer('game_id');
             $table->integer('hole_id');
             $table->integer('player_id');
-            $table->boolean('is_penalty');
-            $table->integer('score');
+            $table->boolean('is_penalty')->default(false);
+            $table->integer('score')->default(false);
             // Score, par calculated on the fly against the ref'd hole
             $table->timestamps();
         });

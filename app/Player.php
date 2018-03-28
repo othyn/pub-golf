@@ -32,6 +32,16 @@ class Player extends Model {
     }
 
     /**
+     * DOCS: Route Model Binding > Implicit Binding > Customizing The Key Name
+     * Allows overriding of the default database column to use on binding instead of 'id'
+     * @return string   DB column name
+     */
+    public function getRouteKeyName() {
+
+        return 'uuid';
+    }
+
+    /**
      * Player relationship to Game
      * @return Collection   Parent Game for the Player
      */
@@ -47,5 +57,17 @@ class Player extends Model {
     public function scores() {
 
         return $this->hasMany(PlayerScore::class);
+    }
+
+    /**
+     * Updates (or creates) the score for a player
+     * @return void
+     */
+    public function updateScore($game, $score) {
+
+        return $this->scores()->updateOrCreate(
+            ['game_id' => $game->id, 'hole_id' => $game->activeHole()->id, 'player_id' => $this->id],
+            ['score' => $score]
+        );
     }
 }

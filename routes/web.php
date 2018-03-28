@@ -35,11 +35,12 @@ Route::get('/games/{game}/edit', 'GameController@edit')->name('game.edit')
                                                        ->middleware('user', 'admin');
 
 
-Route::get('/game/join/{game}', 'GameController@showJoin')->name('game.join');
-Route::post('/game/join/{game}', 'GameController@join');
+/**
+ * AJAX Game routes
+ */
 
-Route::get('/game/play/{game}', 'GameController@play')->name('game.play')
-                                                      ->middleware('user');
+Route::middleware('throttle:20,1')->group(function () {
 
-Route::get('/game/edit/{game}', 'GameController@edit')->name('game.edit')
-                                                      ->middleware('user', 'admin');
+    Route::patch('/games/{game}/players/{player}/score', 'PlayerController@update');
+
+});

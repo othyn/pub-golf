@@ -11,6 +11,12 @@ use App\Player;
 class PlayerScore extends Model {
 
     /**
+     * Whitelist of fields to allow mass assignment
+     * @var array
+     */
+    protected $fillable = ['game_id', 'hole_id', 'player_id', 'score']; // WARN: Careful!
+
+    /**
      * PlayerScore relationship to Game
      * @return Collection   Parent Game for the PlayerScore
      */
