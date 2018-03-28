@@ -25,7 +25,7 @@ class MustBeUser {
             abort(404);
         // The session player isn't on this game
 
-        if (!$request->game->has('holes')->exists() && $request->segment(2) != 'edit') {
+        if (!$request->game->holes()->exists() && $request->segment(3) != 'edit') {
 
             $request->session()->flash('message.warning', 'Too fast! This game is still being setup. You\'ll need to get your fun coordinator to setup at least 1 hole before you can play 😜');
 
