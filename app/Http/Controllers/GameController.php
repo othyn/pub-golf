@@ -90,6 +90,24 @@ class GameController extends Controller {
     }
 
     /**
+     * Returns the refreshed leaderboard
+     * THIS IS A BAD WAY OF DOING IT?
+     * VueJS would be perfect here, feeding data to a client side template
+     * @param  Game   $game Game instance to manage
+     * @return array        Active hole
+     */
+    public function leaderboard(Game $game) {
+
+        $playerID = session()->get('player_id');
+
+        $player = $game->players()->where('id', $playerID)->first();
+
+        // TODO: Better way of doing this...
+
+        return view('components.leaderboard', compact('game', 'player'));
+    }
+
+    /**
      * Edit the game
      * Limited to admins of the game only
      * @param  Game   $game Game instance to manage

@@ -31,6 +31,25 @@ $(function() {
 
     let holePoll = setInterval(pollForHoleChange, 10000);
 
+    function pollForLeaderboard() {
+
+        axios.get('/games/' + game + '/leaderboard')
+            .then((response) => {
+
+                $('#leaderboard').html(response.data);
+                // Such a heavy way of doing it
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem refreshing the leaderboard, please refresh the page.', 'error');
+
+                clearInterval(leaderboardPoll);
+            });
+    }
+
+    let leaderboardPoll = setInterval(pollForLeaderboard, 30000);
+
 });
 
 
