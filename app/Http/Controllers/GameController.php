@@ -99,51 +99,6 @@ class GameController extends Controller {
      */
     public function play(Game $game) {
 
-        // TODO: Middleware?
-        // - Has user in session
-        // - Is valid on game for user in session
-        // - Game is open to play (needs Holes)
-
-        $tempData = [
-            'name'         => 'Test game name',
-            'current_hole' => 1,
-            'par_total'    => 10,
-            'holes'        => [
-                [
-                    'location' => 'Pub A',
-                    'drink'    => 'Shots',
-                    'par'      => 3
-                ],
-                [
-                    'location' => 'Pub B',
-                    'drink'    => 'Water',
-                    'par'      => 7
-                ]
-            ],
-            'players'      => [
-                [
-                    'nickname'    => 'Jess',
-                    'scores'      => [2, 3],
-                    'score_total' => 5
-                ],
-                [
-                    'nickname'    => 'Jill',
-                    'scores'      => [3, 5],
-                    'score_total' => 8
-                ],
-                [
-                    'nickname'    => 'Bob',
-                    'scores'      => [1, 8],
-                    'score_total' => 9
-                ],
-                [
-                    'nickname'    => 'Mark',
-                    'scores'      => [4, 7],
-                    'score_total' => 11
-                ],
-            ]
-        ];
-
         return view('play', compact('game'));
     }
 
@@ -155,51 +110,6 @@ class GameController extends Controller {
      * @return View         Edit View instance
      */
     public function edit(Game $game) {
-
-        // TODO: Middleware?
-        // - Has user in session
-        // - Is valid on game for user in session
-        // - User is admin for game
-
-        $tempData = [
-            'game_code'   => $gameCode,
-            'name'        => 'Test game name',
-            'max_players' => 10,
-            'holes'       => [
-                [
-                    'location' => 'Pub A',
-                    'drink'    => 'Shots',
-                    'par'      => 3
-                ],
-                [
-                    'location' => 'Pub B',
-                    'drink'    => 'Water',
-                    'par'      => 7
-                ]
-            ],
-            'players'     => [
-                [
-                    'nickname'    => 'Jess',
-                    'scores'      => [2, 3],
-                    'score_total' => 5
-                ],
-                [
-                    'nickname'    => 'Jill',
-                    'scores'      => [3, 5],
-                    'score_total' => 8
-                ],
-                [
-                    'nickname'    => 'Bob',
-                    'scores'      => [1, 8],
-                    'score_total' => 9
-                ],
-                [
-                    'nickname'    => 'Mark',
-                    'scores'      => [4, 7],
-                    'score_total' => 11
-                ],
-            ]
-        ];
 
         return view('edit', compact('game'));
     }
