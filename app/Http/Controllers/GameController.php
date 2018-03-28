@@ -116,7 +116,13 @@ class GameController extends Controller {
      */
     public function play(Game $game) {
 
-        return view('play', compact('game'));
+        $playerID = session()->get('player_id');
+
+        $player = $game->players()->where('id', $playerID)->first();
+
+        // TODO: Better way of doing this...
+
+        return view('play', compact('game', 'player'));
     }
 
     /**
@@ -128,6 +134,12 @@ class GameController extends Controller {
      */
     public function edit(Game $game) {
 
-        return view('edit', compact('game'));
+        $playerID = session()->get('player_id');
+
+        $player = $game->players()->where('id', $playerID)->first();
+
+        // TODO: Better way of doing this...
+
+        return view('edit', compact('game', 'player'));
     }
 }
