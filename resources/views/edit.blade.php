@@ -5,8 +5,6 @@
     <h1 class="title is-fancy-font is-size-0">Edit game</h1>
     <h4 class="subtitle p-b-md">To invite people to play, send them the code below...</h4>
 
-    <a href="/game/play/{{ $game->code }}" class="button is-medium is-primary">Play game</a>
-
     <div class="box">
 
         <div class="field has-addons">
@@ -29,6 +27,9 @@
 @endsection
 
 @section ('main-content')
+
+    <a href="/game/play/{{ $game->code }}" class="button is-large is-fullwidth is-primary m-b-lg">Play game</a>
+    <!-- TODO: Push to top right of page, in nav style -->
 
     <div class="box content">
 
@@ -58,10 +59,10 @@
                                 <span class="select is-fullwidth">
                                     <select name="active_hole">
 
-                                        @foreach ($holes as $hole_order => $hole)
+                                        @foreach ($game->holes as $hole)
 
-                                            <option value="{{ $hole_order }}">
-                                                {{ $hole['location'] }} - {{ $hole['drink'] }} - {{ $hole['par'] }}
+                                            <option value="{{ $hole->uuid }}">
+                                                {{ $hole->location }} - {{ $hole->drink }} - {{ $hole->par }}
                                             </option>
 
                                         @endforeach
@@ -110,7 +111,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="text" name="name" value="{{ $name }}" placeholder="Pub Golf #1" minlength="5" maxlength="50" required>
+                                <input class="input" type="text" name="name" value="{{ $game->name }}" placeholder="Pub Golf #1" minlength="5" maxlength="50" required>
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-beer fa-xs"></i>
                                 </span>
@@ -131,7 +132,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="number" name="max_players" value="{{ $max_players }}" min="1" max="100" required>
+                                <input class="input" type="number" name="max_players" value="{{ $game->max_players }}" min="1" max="100" required>
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-users fa-xs"></i>
                                 </span>
@@ -179,20 +180,20 @@
 
             <tbody>
 
-                @foreach ($holes as $hole_order => $hole)
+                @foreach ($game->holes as $i => $hole)
 
                     <tr>
 
-                        <td>{{ ++$hole_order }}</td>
-                        <td>{{ $hole['location'] }}</td>
-                        <td>{{ $hole['drink'] }}</td>
-                        <td>{{ $hole['par'] }}</td>
+                        <td>{{ ++$i }}</td>
+                        <td>{{ $hole->location }}</td>
+                        <td>{{ $hole->drink }}</td>
+                        <td>{{ $hole->par }}</td>
 
                         <td class="has-text-centered">
-                            <a class="button is-small is-info edit-hole-btn" data-ref="{{ $hole['uuid'] }}" data-location="{{ $hole['location'] }}">
+                            <a class="button is-small is-info edit-hole-btn" data-ref="{{ $hole->uuid }}" data-location="{{ $hole->location }}">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a class="button is-small is-danger delete-hole-btn" data-ref="{{ $hole['uuid'] }}" data-location="{{ $hole['location'] }}">
+                            <a class="button is-small is-danger delete-hole-btn" data-ref="{{ $hole->uuid }}" data-location="{{ $hole->location }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             {{-- Implement  --}}
@@ -300,17 +301,17 @@
 
             <tbody>
 
-                @foreach ($players as $player)
+                @foreach ($game->players as $player)
 
                     <tr>
 
-                        <td>{{ $player['name'] }}</td>
+                        <td>{{ $player->name }}</td>
 
                         <td class="has-text-centered">
-                            <a class="button is-small is-warning penalise-player-btn" data-ref="{{ $player['uuid'] }}" data-name="{{ $player['name'] }}">
+                            <a class="button is-small is-warning penalise-player-btn" data-ref="{{ $player->uuid }}" data-name="{{ $player->name }}">
                                 <i class="fa fa-flag"></i>
                             </a>
-                            <a class="button is-small is-danger delete-player-btn" data-ref="{{ $player['uuid'] }}" data-name="{{ $player['name'] }}">
+                            <a class="button is-small is-danger delete-player-btn" data-ref="{{ $player->uuid }}" data-name="{{ $player->name }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             {{-- Implement  --}}
