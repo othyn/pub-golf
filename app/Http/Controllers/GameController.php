@@ -78,6 +78,13 @@ class GameController extends Controller {
             'name' => 'required|min:1|max:50'
         ]);
 
+        if ($game->players()->count() >= $game->max_players) {
+
+            $request->session()->flash('message.warning', 'Sorry, this game has run out of available spaces. 😭 Ask your fun coordinator to add more!');
+
+            return redirect('/');
+        }
+
         $player = $game->players()->firstOrCreate([
             'name' => request('name')
         ]);
