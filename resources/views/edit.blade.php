@@ -5,6 +5,8 @@
     <h1 class="title is-fancy-font is-size-0">Edit game</h1>
     <h4 class="subtitle p-b-md">To invite people to play, send them the code below...</h4>
 
+    <a href="/game/play/{{ $game->code }}" class="button is-medium is-primary">Play game</a>
+
     <div class="box">
 
         <div class="field has-addons">
