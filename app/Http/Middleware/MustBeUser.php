@@ -19,9 +19,9 @@ class MustBeUser {
             abort(404);
         // User doesn't have a player in the session yet
 
-        $playerID = $request->session()->get('player_id');
+        $sessionPlayerID = $request->session()->get('player_id');
 
-        if (!$request->game->players()->where('id', $playerID)->exists())
+        if (!$request->game->players()->where('id', $sessionPlayerID)->exists())
             abort(404);
         // The session player isn't on this game
 
