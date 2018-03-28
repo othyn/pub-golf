@@ -11,12 +11,7 @@
 |
 */
 
-// TODO: Middleware for session user ID check on Web & API
-// - https://laravel.com/docs/5.6/session
-// - https://laravel.com/docs/5.6/middleware
-// - https://scotch.io/tutorials/understanding-laravel-middleware
-//
-// TODO: Rate limiting for the above
+// TODO: Rate limiting for the web / api routes
 // - https://laravel.com/docs/5.6/routing#rate-limiting
 // - https://scotch.io/tutorials/understanding-laravel-middleware
 
@@ -36,6 +31,8 @@ Route::post('/game/create', 'GameController@create')->name('game.create');
 Route::get('/game/join/{game}', 'GameController@showJoin')->name('game.join');
 Route::post('/game/join/{game}', 'GameController@join');
 
-Route::get('/game/edit/{game}', 'GameController@edit')->name('game.edit');
+Route::get('/game/play/{game}', 'GameController@play')->name('game.play')
+                                                      ->middleware('user');
 
-Route::get('/game/play/{game}', 'GameController@play')->name('game.play');
+Route::get('/game/edit/{game}', 'GameController@edit')->name('game.edit')
+                                                      ->middleware('user', 'admin');
