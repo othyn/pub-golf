@@ -15,7 +15,7 @@
 
         @include ('layouts.errors')
 
-        <form method="POST" action="/game/join/{{ $game->code }}">
+        <form method="POST" action="/games/{{ $game->code }}/join">
 
             @csrf
 

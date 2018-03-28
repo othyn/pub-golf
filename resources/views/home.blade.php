@@ -20,7 +20,7 @@
 
                 <p>Join game. Get bevs. Have a laugh!</p>
 
-                <form id="join-form" method="POST" action="/game/join">
+                <form id="join-form" method="POST" action="/games/join">
 
                     @csrf
 
@@ -58,7 +58,7 @@
 
                 <p>Create game. Invite friends. Get bevs. Have a laugh!</p>
 
-                <form method="POST" action="/game/create">
+                <form method="POST" action="/games">
 
                     @csrf
 

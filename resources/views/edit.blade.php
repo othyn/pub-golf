@@ -28,7 +28,7 @@
 
 @section ('main-content')
 
-    <a href="/game/play/{{ $game->code }}" class="button is-large is-fullwidth is-primary m-b-lg">Play game</a>
+    <a href="/games/{{ $game->code }}/play" class="button is-large is-fullwidth is-primary m-b-lg">Play game</a>
     <!-- TODO: Push to top right of page, in nav style -->
 
     <div class="box content">

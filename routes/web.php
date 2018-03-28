@@ -9,11 +9,8 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+| FYI: AJAX endpoints in here as they are stateful
 */
-
-// TODO: Rate limiting for the web / api routes
-// - https://laravel.com/docs/5.6/routing#rate-limiting
-// - https://scotch.io/tutorials/understanding-laravel-middleware
 
 /**
  * Landing routes
@@ -26,7 +23,17 @@ Route::view('/', 'home')->name('home');
  * Game routes
  */
 
-Route::post('/game/create', 'GameController@create')->name('game.create');
+Route::post('/games', 'GameController@store');
+
+Route::get ('/games/{game}/join', 'JoinController@index')->name('game.join');
+Route::post('/games/{game}/join', 'JoinController@join');
+
+Route::get('/games/{game}/play', 'GameController@play')->name('game.play')
+                                                       ->middleware('user');
+
+Route::get('/games/{game}/edit', 'GameController@edit')->name('game.edit')
+                                                       ->middleware('user', 'admin');
+
 
 Route::get('/game/join/{game}', 'GameController@showJoin')->name('game.join');
 Route::post('/game/join/{game}', 'GameController@join');
