@@ -87,7 +87,10 @@ class GameController extends Controller {
         $request->session()->put('player_id', $player->id);
         // Set what player the user is using
 
-        return redirect()->route('game.play', compact('game'));
+        if ($player->is_admin)
+            return redirect()->route('game.edit', compact('game'));
+        else
+            return redirect()->route('game.play', compact('game'));
     }
 
     /**
