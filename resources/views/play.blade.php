@@ -105,11 +105,27 @@
 
                             @foreach ($player->scores as $score)
 
-                                <td>{{ $score }}</td>
+                                @if ($game->activeHole()->id == $score->hole_id)
+
+                                    <td id="active-score">{{ $score->score }}</td>
+
+                                @else
+
+                                    <td>{{ $score->score }}</td>
+
+                                @endif
 
                             @endforeach
 
-                            <td>{{ $player->scores->sum('score') }}</td>
+                            @if (session('player_id') == $player->id)
+
+                                <td id="total-score">{{ $player->scores->sum('score') }}</td>
+
+                            @else
+
+                                <td>{{ $player->scores->sum('score') }}</td>
+
+                            @endif
 
                         </tr>
 

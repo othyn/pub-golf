@@ -33,7 +33,8 @@ class PlayerController extends Controller {
         $player->updateScore($game, $score);
 
         return [
-            'score' => $score
+            'score' => $score,
+            'total' => $player->scores->sum('score')
         ];
     }
 }

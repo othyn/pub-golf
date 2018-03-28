@@ -1,8 +1,9 @@
 $('#submit-score-btn').on('click', function() {
 
-    let game   = $(this).data('game')
-      , player = $(this).data('player')
-      , score  = $('[name=score]').val();
+    let game       = $(this).data('game')
+      , player     = $(this).data('player')
+      , score      = $('[name=score]').val()
+      , totalScore = parseInt($('#total-score').text()) - score;
 
     axios({
         method: 'PATCH',
@@ -13,7 +14,13 @@ $('#submit-score-btn').on('click', function() {
     })
     .then((response) => {
 
-        swal('Yay!', 'Your par score for this hole is currently ' + response.data.score + '!', 'success');
+        swal('Woop 🎉', 'Your par score for this hole is ' + response.data.score, 'success');
+
+        $('#active-score').text(response.data.score);
+        $('#total-score').text(response.data.total);
+        // Vue would come in real handy right about now...
+
+        $('[name=score]').val(0);
 
     })
     .catch((error) => {
