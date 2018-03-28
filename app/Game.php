@@ -14,7 +14,7 @@ class Game extends Model {
      * Whitelist of fields to allow mass assignment
      * @var array
      */
-    protected $fillable = ['name', 'admin_player_id'];
+    protected $fillable = ['name'];
 
     /**
      * The "booting" method of the model.
@@ -73,6 +73,15 @@ class Game extends Model {
     }
 
     /**
+     * Gets the active Hole
+     * @return Collection   Active Hole
+     */
+    public function activeHole() {
+
+        return $this->holes()->where('is_active', true)->first();
+    }
+
+    /**
      * Game relationship to Player
      * @return Collection   Players attached to the game
      */
@@ -82,21 +91,20 @@ class Game extends Model {
     }
 
     /**
+     * Gets the admin Player
+     * @return Collection   Admin Player
+     */
+    public function adminPlayer() {
+
+        return $this->players()->where('is_admin', true)->first();
+    }
+
+    /**
      * Game relationship to PlayerScore
      * @return Collection   PlayerScores attached to the game
      */
     public function playerScores() {
 
         return $this->hasMany(PlayerScore::class);
-    }
-
-    /**
-     * Add a player to a game
-     * @param string $name player name
-     * @return Player      Created player instance
-     */
-    public function addPlayer($name) {
-
-        return $this->players()->create(compact('name'));
     }
 }

@@ -41,11 +41,12 @@ class GameController extends Controller {
 
         $game = Game::create(request(['name']));
 
-        $player = $game->addPlayer(request('organiser_name'));
-
-        $game->admin_player_id = $player->id;
-
-        $game->save();
+        $player = $game->players()->create([
+            'name'     => request('organiser_name'),
+            'is_admin' => true
+        ]);
+        // Careful with mass assignment of is_admin to explicitly build
+        // the data array
 
         $request->session()->put('player_id', $player->id);
         // Set what player the user is using
@@ -77,7 +78,11 @@ class GameController extends Controller {
             'name' => 'required|min:1|max:50'
         ]);
 
-        $player = $game->addPlayer(request('name'));
+        $player = $game->players()->firstOrCreate([
+            'name' => request('name')
+        ]);
+        // Careful with mass assignment of is_admin to explicitly build
+        // the data array
 
         $request->session()->put('player_id', $player->id);
         // Set what player the user is using

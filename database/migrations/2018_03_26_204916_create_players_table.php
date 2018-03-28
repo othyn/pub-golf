@@ -18,6 +18,7 @@ class CreatePlayersTable extends Migration
             $table->integer('game_id');
             $table->uuid('uuid');
             $table->string('name');
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
     }

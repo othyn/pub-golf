@@ -15,7 +15,7 @@ class Player extends Model {
      * Whitelist of fields to allow mass assignment
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'is_admin']; // WARN: Careful!
 
     /**
      * The "booting" method of the model.

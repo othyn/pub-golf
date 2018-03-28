@@ -20,6 +20,7 @@ class CreateHolesTable extends Migration
             $table->string('location');
             $table->string('drink');
             $table->integer('par');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

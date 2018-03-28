@@ -19,7 +19,9 @@ class MustBeAdmin
 
         $playerID = $request->session()->get('player_id');
 
-        if (!$request->game->where('admin_player_id', $playerID)->exists())
+        $adminPlayer = $request->game->adminPlayer();
+
+        if (!$adminPlayer || $adminPlayer->id != $playerID)
             return redirect('/');
         // The session player isn't the admin for this game
 
