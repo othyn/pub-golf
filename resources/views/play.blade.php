@@ -2,17 +2,24 @@
 
 @section ('hero-content')
 
-    <h1 class="title is-fancy-font is-size-0">{{ $name }}</h1>
+    <h1 class="title is-fancy-font is-size-0">{{ $game->name }}</h1>
     <h4 class="subtitle p-b-md">Keep your score &amp; see how the game's going...</h4>
 
 @endsection
 
 @section ('main-content')
 
+    @if (session('player_id') == $player->id)
+
+        <a href="/game/edit/{{ $game->code }}" class="button is-large is-fullwidth is-info m-b-lg">Edit game</a>
+        <!-- TODO: Push to top right of page, in nav style -->
+
+    @endif
+
     <div class="notification is-primary">
 
-        <h2 class="is-fancy-font is-size-3">We're on Hole {{ $current_hole + 1 }}!</h2>
-        <p>Currently at <b>{{ $holes[$current_hole]['location'] }}</b>, ordering <b>{{ $holes[$current_hole]['drink'] }}</b>.</p>
+        <h2 class="is-fancy-font is-size-3">We're at {{ $game->activeHole()->location }}!</h2>
+        <p>Get the round in for <b>{{ $game->activeHole()->drink }}</b></p>
 
     </div>
 
@@ -54,10 +61,10 @@
 
                         <th>Hole</th>
 
-                        @foreach ($holes as $hole_order => $hole)
+                        @foreach ($game->holes as $i => $hole)
 
                             <th>
-                                <abbr title="{{ $hole['location'] }}">{{ ++$hole_order }}</abbr>
+                                <abbr title="{{ $hole->location }}">{{ ++$i }}</abbr>
                             </th>
 
                         @endforeach
@@ -72,13 +79,13 @@
 
                         <th>Par</th>
 
-                        @foreach ($holes as $hole)
+                        @foreach ($game->holes as $hole)
 
-                            <th>{{ $hole['par'] }}</th>
+                            <th>{{ $hole->par }}</th>
 
                         @endforeach
 
-                        <th>{{ $par_total }}</th>
+                        <th>{{ $game->holes->sum('par') }}</th>
 
                     </tr>
 
@@ -86,21 +93,23 @@
 
                 <tbody>
 
-                    @foreach ($players as $position => $player)
+                    <!-- TODO: This needs sorting by SUM ASC -->
 
-                        <tr class="{{ $position == 0 ? 'is-selected' : '' }}">
+                    @foreach ($game->players as $i => $player)
 
-                            <th>{{ ++$position }}</th>
+                        <tr class="{{ $i == 0 ? 'is-selected' : '' }}">
 
-                            <td>{{ $player['nickname'] }}</td>
+                            <th>{{ ++$i }}</th>
 
-                            @foreach ($player['scores'] as $score)
+                            <td>{{ $player->name }}</td>
+
+                            @foreach ($player->scores as $score)
 
                                 <td>{{ $score }}</td>
 
                             @endforeach
 
-                            <td>{{ $player['score_total'] }}</td>
+                            <td>{{ $player->scores->sum('score') }}</td>
 
                         </tr>
 
