@@ -1,10 +1,6 @@
-$('#join-btn').on('click', function(e) {
+$('[name=code]').on('change', function() {
 
-    e.preventDefault();
-
-    $('#join-form').attr('action', '/game/join/' + $('[name=code]').val());
-
-    $('#join-form').submit();
+    $('#join-form').attr('action', '/game/join/' + $(this).val());
 });
 // Smells funny, but works inline with application design
 // - I'm torn
