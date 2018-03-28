@@ -57,8 +57,6 @@
                 <thead>
                     <tr>
 
-                        <td></td>
-
                         <th>Hole</th>
 
                         @foreach ($game->holes as $i => $hole)
@@ -74,8 +72,6 @@
                     </tr>
 
                     <tr>
-
-                        <th><abbr title="Position">Pos</abbr></th>
 
                         <th>Par</th>
 
@@ -99,33 +95,27 @@
 
                         <tr class="{{ $i == 0 ? 'is-selected' : '' }}">
 
-                            <th>{{ ++$i }}</th>
-
                             <td>{{ $player->name }}</td>
 
-                            @foreach ($player->scores as $score)
+                            @foreach ($player->scores as $scoreCount => $score)
 
-                                @if ($game->activeHole()->id == $score->hole_id)
-
-                                    <td id="active-score">{{ $score->score }}</td>
-
-                                @else
-
-                                    <td>{{ $score->score }}</td>
-
-                                @endif
+                                <td>{{ $score->score }}</td>
 
                             @endforeach
 
-                            @if (session('player_id') == $player->id)
+                            @if ($player->scores->count() < $game->holes->count())
 
-                                <td id="total-score">{{ $player->scores->sum('score') }}</td>
+                                @for ($j = 0; $j < ($game->holes->count() - $player->scores->count()); ++$j)
 
-                            @else
+                                    <td>0</td>
 
-                                <td>{{ $player->scores->sum('score') }}</td>
+                                @endfor
 
                             @endif
+
+                            {{-- This solution actually makes me a little queasy, but it works for now, just pads the table cells --}}
+
+                            <td>{{ $player->scores->sum('score') }}</td>
 
                         </tr>
 
@@ -140,3 +130,6 @@
     </div>
 
 @endsection
+
+<script> let game = '{{ $game->code }}', currentHole = '{{ $game->activeHole()->uuid }}'; </script>
+<!-- Ewwww -->
