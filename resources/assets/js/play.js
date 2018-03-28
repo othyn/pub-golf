@@ -1,3 +1,39 @@
+$(function() {
+
+    function pollForHoleChange() {
+
+        axios.get('/games/' + game + '/active-hole')
+            .then((response) => {
+
+                if (response.data.hole != currentHole) {
+
+                    let location = response.data.location
+                      , drink    = response.data.drink;
+
+                    swal('Moving on 🏃', `Now on to ${location}, drinking ${drink}.`, 'success');
+
+                    $('#game-location').text(location);
+                    $('#game-drink').text(drink);
+                    $('[name=score]').val(response.data.par);
+                    // Vue would come in real handy right about now...
+
+                    currentHole = response.data.hole;
+                }
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem refreshing the game, please refresh the page.', 'error');
+
+                clearInterval(holePoll);
+            });
+    }
+
+    let holePoll = setInterval(pollForHoleChange, 10000);
+
+});
+
+
 $('#submit-score-btn').on('click', function() {
 
     let game       = $(this).data('game')

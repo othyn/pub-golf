@@ -10,7 +10,6 @@ class GameController extends Controller {
 
     /**
      * Handles game creation
-     *
      * @return RedirectResponse     Play RedirectResponse
      */
     public function store(Request $request) {
@@ -59,7 +58,6 @@ class GameController extends Controller {
     /**
      * Let's play a game!
      * Limited to players of the game only
-     *
      * @param  Game   $game Game instance
      * @return View         Play View instance
      */
@@ -75,9 +73,25 @@ class GameController extends Controller {
     }
 
     /**
+     * Returns the active hole
+     * @param  Game   $game Game instance to manage
+     * @return array        Active hole
+     */
+    public function activeHole(Game $game) {
+
+        $hole = $game->activeHole();
+
+        return [
+            'location' => $hole->location,
+            'drink'    => $hole->drink,
+            'par'      => $hole->par,
+            'hole'     => $hole->uuid
+        ];
+    }
+
+    /**
      * Edit the game
      * Limited to admins of the game only
-     *
      * @param  Game   $game Game instance to manage
      * @return View         Edit View instance
      */

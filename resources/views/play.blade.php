@@ -18,8 +18,8 @@
 
     <div class="notification is-primary">
 
-        <h2 class="is-fancy-font is-size-3">We're at {{ $game->activeHole()->location }}!</h2>
-        <p>Get the round in for <b>{{ $game->activeHole()->drink }}</b></p>
+        <h2 class="is-fancy-font is-size-3">We're at <span id="game-location">{{ $game->activeHole()->location }}</span>!</h2>
+        <p>Get the round in for <strong id="game-drink">{{ $game->activeHole()->drink }}</strong></p>
 
     </div>
 
@@ -30,8 +30,8 @@
         <div class="field has-addons">
 
             <div class="control is-expanded">
-                <input class="input is-medium" type="number" name="score" value="1" min="0" max="100">
-                <p class="help">Enter the amount you did it in, the system will do the golf maths for you 😄</p>
+                <input class="input is-medium" type="number" name="score" value="{{ $game->activeHole()->par }}">
+                <p class="help">Enter the amount you did it in, between 0 and 99, the system will do the golf maths for you 😄</p>
             </div>
 
             <div class="control">
