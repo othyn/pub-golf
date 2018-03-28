@@ -13,7 +13,7 @@
 
         <p>Join game. Get bevs. Have a laugh!</p>
 
-        @include ('layouts.errors')
+        @include ('partials.errors')
 
         <form method="POST" action="/games/{{ $game->code }}/join">
 
