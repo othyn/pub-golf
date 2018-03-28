@@ -17,11 +17,9 @@ class MustBeAdmin
 
         // Assumes MustBeUser is run first
 
-        $playerID = $request->session()->get('player_id');
+        $sessionPlayerID = $request->session()->get('player_id');
 
-        $adminPlayer = $request->game->adminPlayer();
-
-        if (!$adminPlayer || $adminPlayer->id != $playerID)
+        if ($request->game->adminPlayer()->id != $sessionPlayerID)
             abort(404);
         // The session player isn't the admin for this game
 
