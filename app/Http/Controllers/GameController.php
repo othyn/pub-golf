@@ -15,7 +15,7 @@ class GameController extends Controller {
      */
     public function store(Request $request) {
 
-        $this->validate($request, [
+        $request->validate([
             'name'           => 'required|min:1|max:50',
             'organiser_name' => 'required|min:1|max:50'
         ]);

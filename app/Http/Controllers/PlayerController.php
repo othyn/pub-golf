@@ -24,8 +24,8 @@ class PlayerController extends Controller {
             abort(401);
         // Wrong user, Unauthorized
 
-        $this->validate($request, [
-            'score' => 'required|min:0|max:100'
+        $request->validate([
+            'score' => 'required|digits_between:0,2'
         ]);
 
         $score = $request->score - $game->activeHole()->par;
@@ -33,8 +33,7 @@ class PlayerController extends Controller {
         $player->updateScore($game, $score);
 
         return [
-            'score' => $score,
-            'total' => $player->scores->sum('score')
+            'score' => $score
         ];
     }
 }

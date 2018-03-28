@@ -28,11 +28,11 @@ class JoinController extends Controller {
      */
     public function join(Request $request, Game $game) {
 
-        $this->validate(request(), [
+        $request->validate([
             'name' => 'required|min:1|max:50'
         ]);
 
-        if (!$player = $game->players()->where('name', request('name'))->first()) {
+        if (!$player = $game->players()->where('name', $request->name)->first()) {
 
             // If a player doesn't already exist for this game...
 
@@ -45,7 +45,7 @@ class JoinController extends Controller {
             // ... check that there are available spaces ...
 
             $player = $game->players()->create([
-                'name' => request('name')
+                'name' => $request->name
             ]);
             // ... and create the game
             // Being careful with mass assignment of is_admin to explicitly build
