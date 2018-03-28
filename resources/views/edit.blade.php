@@ -10,14 +10,14 @@
         <div class="field has-addons">
 
             <div class="control is-expanded has-icons-left">
-                <input class="input is-medium" type="text" name="game-code" value="{{ $game_code }}" readonly>
+                <input class="input is-medium" type="text" name="code" value="{{ $game->code }}" readonly>
                 <span class="icon is-small is-left">
                     <i class="fa fa-hashtag fa-xs"></i>
                 </span>
             </div>
 
             <div class="control">
-                <a id="game-code-btn" class="button is-medium is-info">Copy link</a>
+                <a id="code-btn" class="button is-medium is-info">Copy link</a>
             </div>
 
         </div>

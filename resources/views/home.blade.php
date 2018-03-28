@@ -35,7 +35,7 @@
 
                     <div class="field">
                         <div class="control has-icons-left">
-                            <input class="input is-medium" type="text" name="game_code" placeholder="BARTMAN" minlength="7" maxlength="7" required autocomplete="off">
+                            <input class="input is-medium" type="text" name="code" placeholder="BARTMAN" minlength="7" maxlength="7" required autocomplete="off">
                             <span class="icon is-small is-left">
                                 <i class="fa fa-hashtag fa-xs"></i>
                             </span>

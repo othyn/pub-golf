@@ -15,7 +15,7 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('game_code', 7)->unique();
+            $table->char('code', 7)->unique();
             // Random A-Z combination for easy sharing, should give around 8b (26^7) permutations
             $table->string('name');
             $table->integer('max_players')->default(10);

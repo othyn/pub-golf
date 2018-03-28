@@ -25,9 +25,9 @@ class Game extends Model {
         parent::boot();
 
         self::creating(function ($model) {
-            $model->game_code = self::generateGameCode();
+            $model->code = self::generateGameCode();
         });
-        // Auto generate game code into game_code DB field upon create
+        // Auto generate game code into code DB field upon create
     }
 
     /**
@@ -60,7 +60,7 @@ class Game extends Model {
      */
     public function getRouteKeyName() {
 
-        return 'game_code';
+        return 'code';
     }
 
     /**

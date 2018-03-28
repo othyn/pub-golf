@@ -2,7 +2,7 @@ $('#join-btn').on('click', function(e) {
 
     e.preventDefault();
 
-    $('#join-form').attr('action', '/game/join/' + $('[name=game_code]').val());
+    $('#join-form').attr('action', '/game/join/' + $('[name=code]').val());
 
     $('#join-form').submit();
 });
