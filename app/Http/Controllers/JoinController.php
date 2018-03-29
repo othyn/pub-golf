@@ -40,7 +40,9 @@ class JoinController extends Controller {
 
                 $request->session()->flash('message.warning', 'Sorry, this game has run out of available spaces. 😭 Ask your fun coordinator to add more!');
 
-                return redirect('/');
+                $request->session()->flash('join.name', $request->name);
+
+                return redirect("/games/{$game->code}/join");
             }
             // ... check that there are available spaces ...
 
