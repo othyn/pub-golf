@@ -202,7 +202,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="text" name="hole_location" value="" required>
+                                <input class="input" type="text" name="hole_location" value="" required autocomplete="off">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-map-marker fa-xs"></i>
                                 </span>
@@ -223,7 +223,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="text" name="hole_drink" value="" required>
+                                <input class="input" type="text" name="hole_drink" value="" required autocomplete="off">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-beer fa-xs"></i>
                                 </span>
@@ -244,7 +244,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="number" name="hole_par" value="5" min="1" max="100" required>
+                                <input class="input" type="number" name="hole_par" value="5" min="1" max="100" required autocomplete="off">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-star fa-xs"></i>
                                 </span>
