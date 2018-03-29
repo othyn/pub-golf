@@ -65,3 +65,10 @@ Route::middleware('user:edit', 'admin', 'throttle:75,1')->group(function () {
     Route::delete('/games/{game}/hole/{hole}', 'HoleController@destroy');
 
 });
+
+Route::middleware('user:edit', 'admin', 'throttle:75,1')->group(function () {
+
+    Route::post('/games/{game}/players/{player}/penalise', 'PlayerController@penalise');
+    Route::delete('/games/{game}/players/{player}', 'PlayerController@destroy');
+
+});
