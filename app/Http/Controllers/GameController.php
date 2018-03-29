@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Game;
+use App\Hole;
 
 class GameController extends Controller {
 
@@ -86,6 +87,26 @@ class GameController extends Controller {
             'drink'    => $hole->drink,
             'par'      => $hole->par,
             'hole'     => $hole->uuid
+        ];
+    }
+
+    /**
+     * Sets the active hole for a game
+     * @param  Game   $game Game instance
+     * @param  Hole   $hole Hole instance
+     * @return void
+     */
+    public function setActiveHole(Game $game, Hole $hole) {
+
+        $game->holes()->update(['is_active' => 0]);
+
+        $hole->is_active = true;
+        $hole->save();
+
+        return [
+            'location' => $hole->location,
+            'drink'    => $hole->drink,
+            'par'      => $hole->par
         ];
     }
 

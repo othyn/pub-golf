@@ -51,3 +51,10 @@ Route::middleware('user', 'throttle:100,1')->group(function () {
     Route::patch('/games/{game}/players/{player}/score', 'PlayerController@update');
 
 });
+
+
+Route::middleware('user', 'admin', 'throttle:75,1')->group(function () {
+
+    Route::put('/games/{game}/active-hole/{hole}', 'GameController@setActiveHole');
+
+});

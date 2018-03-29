@@ -39,7 +39,7 @@
 
         <hr class="is-dashed">
 
-        <a id="active-hole-btn" class="button is-medium is-primary is-fullwidth">Set active hole</a>
+        <a id="active-hole-btn" class="button is-medium is-primary is-fullwidth" data-game="{{ $game->code }}">Set active hole</a>
 
         <section id="swal-active-hole-content-template" style="display: none">
 

@@ -10,6 +10,16 @@ use App\PlayerScore;
 class Hole extends Model {
 
     /**
+     * DOCS: Route Model Binding > Implicit Binding > Customizing The Key Name
+     * Allows overriding of the default database column to use on binding instead of 'id'
+     * @return string   DB column name
+     */
+    public function getRouteKeyName() {
+
+        return 'uuid';
+    }
+
+    /**
      * Hole relationship to Game
      * @return Collection   Parent Game for the Hole
      */

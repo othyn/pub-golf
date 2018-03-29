@@ -1,5 +1,3 @@
-import swal from 'sweetalert';
-
 $('#code-btn').on('click', function() {
 
     var $temp = $('<input>');
@@ -25,6 +23,31 @@ $('#active-hole-btn').on('click', function() {
         title: 'Set active hole',
         content: $swalContent[0],
         buttons: [true, 'Let\'s go!']
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game = $(this).data('game')
+              , hole = $('.swal-content').find('[name=active_hole]').val();
+
+            axios({
+                method: 'PUT',
+                url: '/games/' + game + '/active-hole/' + hole
+            })
+            .then((response) => {
+
+                swal('Hole set 👌', `The active hole is now ${response.data.location}, drinking ${response.data.drink} with a par of ${response.data.par}`, 'success');
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem changing the hole, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
     //TODO: Do ajax endpointy stuff
 });
