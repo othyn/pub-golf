@@ -45,10 +45,6 @@ class HoleController extends Controller {
     }
 
     /**
-     *
-     * @param
-     */
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
