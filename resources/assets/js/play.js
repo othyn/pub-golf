@@ -23,9 +23,14 @@ $(function() {
             })
             .catch((error) => {
 
-                swal('Uh-oh 😨', 'There was a problem refreshing the game, please refresh the page.', 'error');
+                if (error.response.status == 304) {
 
-                clearInterval(holePoll);
+                    location.reload(true);
+
+                } else {
+
+                    swal('Uh-oh 😨', 'There was a problem refreshing the game, please refresh the page.', 'error');
+                }
             });
     }
 
@@ -41,8 +46,6 @@ $(function() {
             .catch((error) => {
 
                 swal('Uh-oh 😨', 'There was a problem refreshing the leaderboard, please refresh the page.', 'error');
-
-                clearInterval(leaderboardPoll);
             });
     }
 
@@ -50,8 +53,8 @@ $(function() {
 
         let holePoll = setInterval(pollForHoleChange, 10000);
 
-        let initSeconds   = seconds = 30
-          , timerInterval = setInterval(pollForLeaderboardInterval, 1000);
+        let initSeconds     = seconds = 30
+          , leaderboardPoll = setInterval(pollForLeaderboardInterval, 1000);
 
         function pollForLeaderboardInterval() {
 
