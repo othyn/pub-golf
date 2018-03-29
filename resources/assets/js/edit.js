@@ -161,19 +161,45 @@ $('#hole-tbody').on('click', '.edit-hole-btn', function() {
     });
 });
 
-$('.delete-hole-btn').on('click', function() {
+$('#hole-tbody').on('click', '.delete-hole-btn', function() {
 
-    let hole         = $(this).data('ref')
-      , holeLocation = $(this).data('location');
+    let $swalContent = $('#swal-hole-content-template').clone().css({'display': 'block'})
+      , location     = $(this).data('location');
 
     swal({
-        title: `Delete ${holeLocation}?`,
+        title: `Delete ${location}?`,
         text: 'This will permanently delete the hole, with all associated scores and data. This is action not recoverable. Continue?',
         icon: 'warning',
         buttons: ['Hell no!', 'Yes, delete the hole'],
         dangerMode: true,
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game = $(this).data('game')
+              , hole = $(this).data('hole');
+
+            axios({
+                method: 'DELETE',
+                url: '/games/' + game + '/hole/' + hole
+            })
+            .then((response) => {
+
+                swal('Hole deleted 💔', 'We\'ll miss you, hole.', 'success');
+
+                $('#hole-tbody').html(response.data);
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem changing the hole, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
-    //TODO: Do ajax endpointy stuff
 });
 
 $('.penalise-player-btn').on('click', function() {
