@@ -173,35 +173,14 @@
                 <tr>
                     <th colspan="4"></th>
                     <th class="has-text-centered">
-                        <a id="create-hole-btn" class="button is-primary is-small">New hole</a>
+                        <a id="create-hole-btn" class="button is-primary is-small" data-game="{{ $game->code }}">New hole</a>
                     </th>
                 </tr>
             </tfoot>
 
-            <tbody>
+            <tbody id="hole-tbody">
 
-                @foreach ($game->holes as $i => $hole)
-
-                    <tr>
-
-                        <td>{{ ++$i }}</td>
-                        <td>{{ $hole->location }}</td>
-                        <td>{{ $hole->drink }}</td>
-                        <td>{{ $hole->par }}</td>
-
-                        <td class="has-text-centered">
-                            <a class="button is-small is-info edit-hole-btn" data-ref="{{ $hole->uuid }}" data-location="{{ $hole->location }}">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a class="button is-small is-danger delete-hole-btn" data-ref="{{ $hole->uuid }}" data-location="{{ $hole->location }}">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                            {{-- Implement  --}}
-                        </td>
-
-                    </tr>
-
-                @endforeach
+                @include ('components.hole-tbody')
 
             </tbody>
 

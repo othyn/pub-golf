@@ -49,7 +49,6 @@ $('#active-hole-btn').on('click', function() {
         }
 
     });
-    //TODO: Do ajax endpointy stuff
 });
 
 $('#edit-game-btn').on('click', function() {
@@ -72,8 +71,41 @@ $('#create-hole-btn').on('click', function() {
         title: 'New hole',
         content: $swalContent[0],
         buttons: [true, 'Create hole']
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game     = $(this).data('game')
+              , location = $('.swal-content').find('[name=hole_location]').val()
+              , drink    = $('.swal-content').find('[name=hole_drink]').val()
+              , par      = $('.swal-content').find('[name=hole_par]').val();
+
+            axios({
+                method: 'POST',
+                url: '/games/' + game + '/hole',
+                data: {
+                    location: location,
+                    drink: drink,
+                    par: par
+                }
+            })
+            .then((response) => {
+
+                swal('Hole created ⛳', 'Hole is now available to play!', 'success');
+
+                $('#hole-tbody').html(response.data);
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem changing the hole, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
-    //TODO: Do ajax endpointy stuff
 });
 
 $('.edit-hole-btn').on('click', function() {
