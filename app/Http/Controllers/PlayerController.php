@@ -36,4 +36,49 @@ class PlayerController extends Controller {
             'score' => $score
         ];
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Game    $game             Game instance
+     * @param  Player  $player           Player instance
+     * @return \Illuminate\Http\Response
+     */
+    public function penalise(Request $request, Game $game, Player $player) {
+
+        $request->validate([
+            'score' => 'required|digits_between:0,2'
+        ]);
+
+        $player->scores()->create([
+            'game_id'    => $game->id,
+            'hole_id'    => $game->activeHole()->id,
+            'player_id'  => $player->id,
+            'is_penalty' => true,
+            'score'      => $request->score
+        ]);
+
+        return;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Game    $game    Game instance
+     * @param  Player  $player  Player instance
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Game $game, Player $player) {
+
+        if ($player->is_admin)
+            return ['error' => true];
+
+        $game->playerScores()->where(['game_id' => $game->id, 'player_id' => $player->id])->delete();
+
+        $player->delete();
+
+        return view('components.player-tbody', compact('game'));
+        // Yeh this is lazy, use Vue
+    }
 }

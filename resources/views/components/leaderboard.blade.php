@@ -55,17 +55,15 @@
 
                         <td>{{ $player->name }}</td>
 
-                        @foreach ($player->scores as $scoreCount => $score)
+                        @foreach ($player->scores()->where('is_penalty', '=', false)->get() as $scoreCount => $score)
 
                             <td>{{ $score->score }}</td>
 
                         @endforeach
 
-                        <td>{{ $player->scores->where('is_penalty', true)->sum('score') }}</td>
+                        @if ($player->scores()->where('is_penalty', '=', false)->count() < $game->holes->count())
 
-                        @if ($player->scores->count() < $game->holes->count())
-
-                            @for ($j = 0; $j < ($game->holes->count() - $player->scores->count()); ++$j)
+                            @for ($j = 0; $j < ($game->holes->count() - $player->scores()->where('is_penalty', '=', false)->count()); ++$j)
 
                                 <td>0</td>
 
@@ -73,9 +71,11 @@
 
                         @endif
 
+                        <td>{{ $player->scores()->where('is_penalty', '=', true)->sum('score') }}</td>
+
                         {{-- This solution actually makes me a little queasy, but it works for now, just pads the table cells --}}
 
-                        <td>{{ $player->scores->sum('score') }}</td>
+                        <td>{{ $player->scores()->sum('score') }}</td>
 
                     </tr>
 

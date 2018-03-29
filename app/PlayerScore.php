@@ -14,7 +14,7 @@ class PlayerScore extends Model {
      * Whitelist of fields to allow mass assignment
      * @var array
      */
-    protected $fillable = ['game_id', 'hole_id', 'player_id', 'score']; // WARN: Careful!
+    protected $fillable = ['game_id', 'hole_id', 'player_id', 'is_penalty', 'score']; // WARN: Careful!
 
     /**
      * PlayerScore relationship to Game

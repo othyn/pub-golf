@@ -278,27 +278,9 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody id="player-tbody">
 
-                @foreach ($game->players as $player)
-
-                    <tr>
-
-                        <td>{{ $player->name }}</td>
-
-                        <td class="has-text-centered">
-                            <a class="button is-small is-warning penalise-player-btn" data-ref="{{ $player->uuid }}" data-name="{{ $player->name }}">
-                                <i class="fa fa-flag"></i>
-                            </a>
-                            <a class="button is-small is-danger delete-player-btn" data-ref="{{ $player->uuid }}" data-name="{{ $player->name }}">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                            {{-- Implement  --}}
-                        </td>
-
-                    </tr>
-
-                @endforeach
+                @include ('components.player-tbody')
 
             </tbody>
 

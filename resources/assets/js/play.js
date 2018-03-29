@@ -23,14 +23,7 @@ $(function() {
             })
             .catch((error) => {
 
-                if (error.response.status == 304) {
-
-                    location.reload(true);
-
-                } else {
-
-                    swal('Uh-oh 😨', 'There was a problem refreshing the game, please refresh the page.', 'error');
-                }
+                location.reload(true);
             });
     }
 
@@ -45,7 +38,7 @@ $(function() {
             })
             .catch((error) => {
 
-                swal('Uh-oh 😨', 'There was a problem refreshing the leaderboard, please refresh the page.', 'error');
+                location.reload(true);
             });
     }
 

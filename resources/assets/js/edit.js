@@ -193,7 +193,7 @@ $('#hole-tbody').on('click', '.delete-hole-btn', function() {
             })
             .catch((error) => {
 
-                swal('Uh-oh 😨', 'There was a problem changing the hole, try again in a minute.', 'error');
+                swal('Uh-oh 😨', 'There was a problem deleting the hole, try again in a minute.', 'error');
                 // TODO: Could do with displaying validation errors
             });
 
@@ -202,31 +202,86 @@ $('#hole-tbody').on('click', '.delete-hole-btn', function() {
     });
 });
 
-$('.penalise-player-btn').on('click', function() {
+$('#player-tbody').on('click', '.penalise-player-btn', function() {
 
     let $swalContent = $('#swal-player-content-template').clone().css({'display': 'block'})
-      , player       = $(this).data('ref')
       , playerName   = $(this).data('name');
 
     swal({
         title: `Penalise ${playerName}`,
         content: $swalContent[0],
         buttons: [true, 'Send them down!']
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game   = $(this).data('game')
+              , player = $(this).data('player')
+              , score  = $('.swal-content').find('[name=penalise_points]').val();
+
+            axios({
+                method: 'POST',
+                url: '/games/' + game + '/players/' + player + '/penalise',
+                data: {
+                    score: score
+                }
+            })
+            .then((response) => {
+
+                swal('Player penalised 🖕', 'They are going to love you for that!', 'success');
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem penalising the player, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
-    //TODO: Do ajax endpointy stuff
 });
 
-$('.delete-player-btn').on('click', function() {
+$('#player-tbody').on('click', '.delete-player-btn', function() {
 
-    let player     = $(this).data('ref')
-      , playerName = $(this).data('name');
+    let playerName = $(this).data('name');
 
     swal({
         title: `Delete ${playerName}?`,
-        text: 'This will permanently delete the player and their score. This is action not recoverable. Continue?',
+        text: 'This will permanently delete the player and their scores. This is action not recoverable. Continue?',
         icon: 'warning',
         buttons: ['Hell no!', 'Yes, delete them'],
         dangerMode: true,
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game   = $(this).data('game')
+              , player = $(this).data('player');
+
+            axios({
+                method: 'DELETE',
+                url: '/games/' + game + '/players/' + player
+            })
+            .then((response) => {
+
+                if (response.data.error)
+                    swal('You can\'t delete yourself 🤨', 'And come on, you are the admin!', 'error');
+
+                swal('Player deleted 🗑', 'All gone!', 'success');
+
+                $('#player-tbody').html(response.data);
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem deleting the player, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
-    //TODO: Do ajax endpointy stuff
 });
