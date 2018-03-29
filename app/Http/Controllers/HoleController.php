@@ -83,6 +83,21 @@ class HoleController extends Controller {
      */
     public function destroy(Game $game, Hole $hole) {
 
+        $game->playerScores()->where(['game_id' => $game->id, 'hole_id' => $hole->id])->delete();
 
+        if ($hole->is_active && $game->holes()->count() > 1) {
+
+            $hole->delete();
+            // Order is crucial
+
+            $game->holes()->first()->update(['is_active' => true]);
+
+        } else {
+
+            $hole->delete();
+        }
+
+        return view('components.hole-tbody', compact('game'));
+        // Yeh this is lazy, use Vue
     }
 }
