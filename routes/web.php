@@ -57,3 +57,11 @@ Route::middleware('user:edit', 'admin', 'throttle:75,1')->group(function () {
     Route::put('/games/{game}/active-hole/{hole}', 'GameController@setActiveHole');
 
 });
+
+Route::middleware('user:edit', 'admin', 'throttle:75,1')->group(function () {
+
+    Route::post('/games/{game}/hole', 'HoleController@store');
+    Route::post('/games/{game}/hole/{hole}', 'HoleController@update');
+    Route::delete('/games/{game}/hole/{hole}', 'HoleController@destroy');
+
+});
