@@ -22,7 +22,9 @@ class MustBeUser {
 
         $sessionPlayerID = $request->session()->get('player_id');
 
-        if (!$request->game->players()->where('id', $sessionPlayerID)->exists())
+        $player = $request->game->players()->where('id', $sessionPlayerID);
+
+        if (!$player->exists())
             abort(404);
         // The session player isn't on this game
 
@@ -32,7 +34,12 @@ class MustBeUser {
 
                 $request->session()->flash('message.warning', 'Too fast! This game is still being setup. You\'ll need to get your fun coordinator to setup at least 1 hole before you can play 😜');
 
-                return redirect('/');
+                $request->session()->flash('join.name', $player->first()->name);
+
+                if ($request->ajax())
+                    abort(304);
+                else
+                    return redirect("/games/{$request->game->code}/join");
             }
             // The game doesn't have any holes yet!
         }
