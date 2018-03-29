@@ -11,9 +11,10 @@ class MustBeUser {
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param  string    Check if 'play' or 'edit'
      * @return mixed
      */
-    public function handle($request, Closure $next) {
+    public function handle($request, Closure $next, $type) {
 
         if (!$request->session()->has('player_id'))
             abort(404);
@@ -25,13 +26,16 @@ class MustBeUser {
             abort(404);
         // The session player isn't on this game
 
-        if (!$request->game->holes()->exists() && $request->segment(3) != 'edit') {
+        if ($type != 'edit') {
 
-            $request->session()->flash('message.warning', 'Too fast! This game is still being setup. You\'ll need to get your fun coordinator to setup at least 1 hole before you can play 😜');
+            if (!$request->game->holes()->exists()) {
 
-            return redirect('/');
+                $request->session()->flash('message.warning', 'Too fast! This game is still being setup. You\'ll need to get your fun coordinator to setup at least 1 hole before you can play 😜');
+
+                return redirect('/');
+            }
+            // The game doesn't have any holes yet!
         }
-        // The game doesn't have any holes yet!
 
         return $next($request);
     }

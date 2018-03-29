@@ -29,31 +29,30 @@ Route::get ('/games/{game}/join', 'JoinController@index')->name('game.join');
 Route::post('/games/{game}/join', 'JoinController@join');
 
 Route::get('/games/{game}/play', 'GameController@play')->name('game.play')
-                                                       ->middleware('user');
+                                                       ->middleware('user:play');
 
 Route::get('/games/{game}/edit', 'GameController@edit')->name('game.edit')
-                                                       ->middleware('user', 'admin');
+                                                       ->middleware('user:edit', 'admin');
 
 
 /**
  * AJAX Game routes
  */
 
-Route::middleware('user', 'throttle:250,1')->group(function () {
+Route::middleware('user:play', 'throttle:250,1')->group(function () {
 
     Route::get('/games/{game}/active-hole', 'GameController@activeHole');
     Route::get('/games/{game}/leaderboard', 'GameController@leaderboard');
 
 });
 
-Route::middleware('user', 'throttle:250,1')->group(function () {
+Route::middleware('user:play', 'throttle:250,1')->group(function () {
 
     Route::patch('/games/{game}/players/{player}/score', 'PlayerController@update');
 
 });
 
-
-Route::middleware('user', 'admin', 'throttle:75,1')->group(function () {
+Route::middleware('user:edit', 'admin', 'throttle:75,1')->group(function () {
 
     Route::put('/games/{game}/active-hole/{hole}', 'GameController@setActiveHole');
 
