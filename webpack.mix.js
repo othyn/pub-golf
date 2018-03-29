@@ -15,7 +15,7 @@ if (mix.inProduction()) {
     mix.version();
     // Generate with versioning / cache busting
 
-    options.purifyCss = true;
+    // options.purifyCss = true;
     // Only compile required CSS
 }
 
