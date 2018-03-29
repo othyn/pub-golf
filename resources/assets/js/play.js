@@ -29,8 +29,6 @@ $(function() {
             });
     }
 
-    let holePoll = setInterval(pollForHoleChange, 10000);
-
     function pollForLeaderboard() {
 
         axios.get('/games/' + game + '/leaderboard')
@@ -48,8 +46,12 @@ $(function() {
             });
     }
 
-    let leaderboardPoll = setInterval(pollForLeaderboard, 30000);
+    if (window.location.href.split('/')[5] == 'play') {
 
+        let holePoll        = setInterval(pollForHoleChange, 10000);
+        let leaderboardPoll = setInterval(pollForLeaderboard, 30000);
+    }
+    // Quick fix for not-crossed-my-mind-this-would-happen module bundling
 });
 
 
