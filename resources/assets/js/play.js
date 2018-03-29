@@ -48,8 +48,23 @@ $(function() {
 
     if (window.location.href.split('/')[5] == 'play') {
 
-        let holePoll        = setInterval(pollForHoleChange, 10000);
-        let leaderboardPoll = setInterval(pollForLeaderboard, 30000);
+        let holePoll = setInterval(pollForHoleChange, 10000);
+
+        let initSeconds   = seconds = 30
+          , timerInterval = setInterval(pollForLeaderboardInterval, 1000);
+
+        function pollForLeaderboardInterval() {
+
+            seconds -= 1;
+
+            if (seconds <= 0) {
+
+                pollForLeaderboard();
+                seconds = initSeconds;
+            }
+
+            $('#leaderboard').find('#refresh-counter').html(seconds);
+        }
     }
     // Quick fix for not-crossed-my-mind-this-would-happen module bundling
 });

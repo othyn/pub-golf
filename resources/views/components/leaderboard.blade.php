@@ -83,4 +83,6 @@
 
     </div>
 
+    <small style="font-style:italic">Next refresh in <span id="refresh-counter">30</span> seconds</small>
+
 </div>
