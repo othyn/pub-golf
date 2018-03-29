@@ -23,6 +23,7 @@
 
                     @endforeach
 
+                    <th>Penalties</th>
                     <th>Totals</th>
 
                 </tr>
@@ -37,6 +38,7 @@
 
                     @endforeach
 
+                    <th></th>
                     <th>{{ $game->holes->sum('par') }}</th>
 
                 </tr>
@@ -58,6 +60,8 @@
                             <td>{{ $score->score }}</td>
 
                         @endforeach
+
+                        <td>{{ $player->scores->where('is_penalty', true)->sum('score') }}</td>
 
                         @if ($player->scores->count() < $game->holes->count())
 
