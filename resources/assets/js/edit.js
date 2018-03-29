@@ -108,18 +108,57 @@ $('#create-hole-btn').on('click', function() {
     });
 });
 
-$('.edit-hole-btn').on('click', function() {
+$('#hole-tbody').on('click', '.edit-hole-btn', function() {
 
     let $swalContent = $('#swal-hole-content-template').clone().css({'display': 'block'})
-      , hole         = $(this).data('ref')
-      , holeLocation = $(this).data('location');
+      , location     = $(this).data('location')
+      , drink        = $(this).data('drink')
+      , par          = $(this).data('par');
+
+    $swalContent.find('[name=hole_location]').val(location);
+    $swalContent.find('[name=hole_drink]').val(drink);
+    $swalContent.find('[name=hole_par]').val(par);
 
     swal({
-        title: `Edit ${holeLocation}`,
+        title: `Edit ${location}`,
         content: $swalContent[0],
         buttons: [true, 'Save changes']
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game     = $(this).data('game')
+              , hole     = $(this).data('hole')
+              , location = $('.swal-content').find('[name=hole_location]').val()
+              , drink    = $('.swal-content').find('[name=hole_drink]').val()
+              , par      = $('.swal-content').find('[name=hole_par]').val();
+
+            axios({
+                method: 'POST',
+                url: '/games/' + game + '/hole/' + hole,
+                data: {
+                    location: location,
+                    drink: drink,
+                    par: par
+                }
+            })
+            .then((response) => {
+
+                swal('Hole updated ⛳', 'The stuff you wrote has been saved somewhere, i\'ll find it later.', 'success');
+
+                $('#hole-tbody').html(response.data);
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem changing the hole, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
-    //TODO: Do ajax endpointy stuff
 });
 
 $('.delete-hole-btn').on('click', function() {

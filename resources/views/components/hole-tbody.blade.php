@@ -8,10 +8,10 @@
         <td>{{ $hole->par }}</td>
 
         <td class="has-text-centered">
-            <a class="button is-small is-info edit-hole-btn" data-game="{{ $game->code }}" data-hole="{{ $hole->uuid }}">
+            <a class="button is-small is-info edit-hole-btn" data-game="{{ $game->code }}" data-hole="{{ $hole->uuid }}" data-location="{{ $hole->location }}" data-drink="{{ $hole->drink }}" data-par="{{ $hole->par }}">
                 <i class="fa fa-edit"></i>
             </a>
-            <a class="button is-small is-danger delete-hole-btn" data-game="{{ $game->code }}" data-hole="{{ $hole->uuid }}">
+            <a class="button is-small is-danger delete-hole-btn" data-game="{{ $game->code }}" data-hole="{{ $hole->uuid }}" data-location="{{ $hole->location }}">
                 <i class="fa fa-trash"></i>
             </a>
             {{-- Implement  --}}

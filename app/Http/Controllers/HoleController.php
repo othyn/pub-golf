@@ -63,6 +63,15 @@ class HoleController extends Controller {
             'drink'    => 'required|min:1|max:100',
             'par'      => 'required|digits_between:1,2'
         ]);
+
+        $hole->update([
+            'location' => $request->location,
+            'drink'    => $request->drink,
+            'par'      => $request->par
+        ]);
+
+        return view('components.hole-tbody', compact('game'));
+        // Yeh this is lazy, use Vue
     }
 
     /**
