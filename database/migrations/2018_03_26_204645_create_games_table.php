@@ -18,7 +18,7 @@ class CreateGamesTable extends Migration
             $table->char('code', 7)->unique();
             // Random A-Z combination for easy sharing, should give around 8b (26^7) permutations
             $table->string('name');
-            $table->integer('max_players')->default(50);
+            $table->integer('max_players')->default(15);
             $table->timestamps();
         });
     }

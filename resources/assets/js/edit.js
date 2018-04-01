@@ -53,14 +53,54 @@ $('#active-hole-btn').on('click', function() {
 
 $('#edit-game-btn').on('click', function() {
 
-    let $swalContent = $('#swal-edit-game-content-template').clone().css({'display': 'block'});
+    let $swalContent = $('#swal-edit-game-content-template').clone().css({'display': 'block'})
+      , $that        = $(this)
+      , name         = $that.data('name')
+      , max_players  = $that.data('max-players');
+
+    $swalContent.find('[name=name]').val(name);
+    $swalContent.find('[name=max_players]').val(max_players);
 
     swal({
         title: 'Edit game',
         content: $swalContent[0],
         buttons: [true, 'Save changes']
+    })
+    .then((value) => {
+
+        if (value) {
+
+            let game        = $(this).data('game')
+              , name        = $('.swal-content').find('[name=name]').val()
+              , max_players = $('.swal-content').find('[name=max_players]').val();
+
+            axios({
+                method: 'POST',
+                url: '/games/' + game,
+                data: {
+                    name: name,
+                    max_players: max_players
+                }
+            })
+            .then((response) => {
+
+                swal('Game info updated 👍', 'Saved all the stuff you changed, got your back.', 'success');
+
+                $('#game-name').text(name);
+
+                $that.data('name', name);
+                $that.data('max-players', max_players);
+
+            })
+            .catch((error) => {
+
+                swal('Uh-oh 😨', 'There was a problem changing the hole, try again in a minute.', 'error');
+                // TODO: Could do with displaying validation errors
+            });
+
+        }
+
     });
-    //TODO: Do ajax endpointy stuff
 });
 
 $('#create-hole-btn').on('click', function() {

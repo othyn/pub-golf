@@ -2,7 +2,7 @@
 
 @section ('hero-content')
 
-    <h1 class="title is-fancy-font is-size-0">Edit {{ $game->name }}</h1>
+    <h1 class="title is-fancy-font is-size-0">Edit <span id="game-name">{{ $game->name }}</span></h1>
     <h4 class="subtitle p-b-md">To invite people to play, send them the code below...</h4>
 
     <div class="box">
@@ -95,7 +95,7 @@
 
         <hr class="is-dashed">
 
-        <a id="edit-game-btn" class="button is-medium is-primary is-fullwidth">Edit game</a>
+        <a id="edit-game-btn" class="button is-medium is-primary is-fullwidth" data-game="{{ $game->code }}" data-name="{{ $game->name }}" data-max-players="{{ $game->max_players }}">Edit game</a>
 
         <section id="swal-edit-game-content-template" style="display: none">
 
@@ -111,7 +111,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="text" name="name" value="{{ $game->name }}" placeholder="Pub Golf #1" minlength="5" maxlength="50" required>
+                                <input class="input" type="text" name="name" placeholder="Pub Golf #1" minlength="5" maxlength="50" required>
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-beer fa-xs"></i>
                                 </span>
@@ -132,7 +132,7 @@
                         <div class="field">
 
                             <div class="control is-expanded has-icons-left">
-                                <input class="input" type="number" name="max_players" value="{{ $game->max_players }}" min="1" max="100" required>
+                                <input class="input" type="number" name="max_players" min="1" max="100" required>
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-users fa-xs"></i>
                                 </span>

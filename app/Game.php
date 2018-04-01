@@ -14,7 +14,7 @@ class Game extends Model {
      * Whitelist of fields to allow mass assignment
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'max_players'];
 
     /**
      * The "booting" method of the model.

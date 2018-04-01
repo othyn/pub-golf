@@ -54,6 +54,7 @@ Route::middleware('user:play', 'throttle:250,1')->group(function () {
 
 Route::middleware('user:edit', 'admin', 'throttle:75,1')->group(function () {
 
+    Route::post('/games/{game}', 'GameController@update');
     Route::put('/games/{game}/active-hole/{hole}', 'GameController@setActiveHole');
 
 });

@@ -11,6 +11,7 @@ class GameController extends Controller {
 
     /**
      * Handles game creation
+     * @param  Request $request     Request object
      * @return RedirectResponse     Play RedirectResponse
      */
     public function store(Request $request) {
@@ -143,5 +144,24 @@ class GameController extends Controller {
         // TODO: Better way of doing this...
 
         return view('edit', compact('game', 'player'));
+    }
+
+    /**
+     * Updates the primary game stuff; name, max players, etc...
+     * @param  Request $request Request object
+     * @param  Game    $game    Game instance
+     * @return void
+     */
+    public function update(Request $request, Game $game) {
+
+        $request->validate([
+            'name'        => 'required|min:1|max:50',
+            'max_players' => 'required|digits_between:1,2'
+        ]);
+
+        $game->update([
+            'name'        => $request->name,
+            'max_players' => $request->max_players
+        ]);
     }
 }
