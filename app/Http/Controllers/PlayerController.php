@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Game;
 use App\Player;
+use Illuminate\Http\Request;
 
-class PlayerController extends Controller {
-
+class PlayerController extends Controller
+{
     /**
-     * Handles updating the players score
+     * Handles updating the players score.
      * @param  Request $request HTTP Request
      * @param  Game    $game    Game instance
      * @param  Player  $player  Player instance
      * @return array            Request success state
      */
-    public function update(Request $request, Game $game, Player $player) {
-
+    public function update(Request $request, Game $game, Player $player)
+    {
         $sessionPlayerID = $request->session()->get('player_id');
 
-        if ($player->id != $sessionPlayerID)
+        if ($player->id != $sessionPlayerID) {
             abort(401);
+        }
         // Wrong user, Unauthorized
 
         $request->validate([
-            'score' => 'required|digits_between:0,2'
+            'score' => 'required|digits_between:0,2',
         ]);
 
         $score = $request->score - $game->activeHole()->par;
@@ -33,7 +33,7 @@ class PlayerController extends Controller {
         $player->updateScore($game, $score);
 
         return [
-            'score' => $score
+            'score' => $score,
         ];
     }
 
@@ -45,10 +45,10 @@ class PlayerController extends Controller {
      * @param  Player  $player           Player instance
      * @return \Illuminate\Http\Response
      */
-    public function penalise(Request $request, Game $game, Player $player) {
-
+    public function penalise(Request $request, Game $game, Player $player)
+    {
         $request->validate([
-            'score' => 'required|digits_between:0,2'
+            'score' => 'required|digits_between:0,2',
         ]);
 
         $player->scores()->create([
@@ -56,10 +56,8 @@ class PlayerController extends Controller {
             'hole_id'    => $game->activeHole()->id,
             'player_id'  => $player->id,
             'is_penalty' => true,
-            'score'      => $request->score
+            'score'      => $request->score,
         ]);
-
-        return;
     }
 
     /**
@@ -69,10 +67,11 @@ class PlayerController extends Controller {
      * @param  Player  $player  Player instance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $game, Player $player) {
-
-        if ($player->is_admin)
+    public function destroy(Game $game, Player $player)
+    {
+        if ($player->is_admin) {
             return ['error' => true];
+        }
 
         $game->playerScores()->where(['game_id' => $game->id, 'player_id' => $player->id])->delete();
 
