@@ -1,3 +1,6 @@
+[![StyleCI](https://styleci.io/repos/126613560/shield?branch=master)](https://styleci.io/repos/126613560)
+[![Build Status](https://semaphoreci.com/api/v1/othyn/pub-golf/branches/master/shields_badge.svg)](https://semaphoreci.com/othyn/pub-golf)
+
 # pub-golf
 Basic web app for pub golf games
 
