@@ -2,17 +2,13 @@
 
 namespace App;
 
+use Uuid;
 use Illuminate\Database\Eloquent\Model;
 
-use Uuid;
-
-use App\Game;
-use App\PlayerScore;
-
-class Hole extends Model {
-
+class Hole extends Model
+{
     /**
-     * Whitelist of fields to allow mass assignment
+     * Whitelist of fields to allow mass assignment.
      * @var array
      */
     protected $fillable = ['location', 'drink', 'par', 'is_active']; // WARN: Careful!
@@ -21,8 +17,8 @@ class Hole extends Model {
      * The "booting" method of the model.
      * @return void
      */
-    public static function boot() {
-
+    public static function boot()
+    {
         parent::boot();
 
         self::creating(function ($model) {
@@ -33,29 +29,29 @@ class Hole extends Model {
 
     /**
      * DOCS: Route Model Binding > Implicit Binding > Customizing The Key Name
-     * Allows overriding of the default database column to use on binding instead of 'id'
+     * Allows overriding of the default database column to use on binding instead of 'id'.
      * @return string   DB column name
      */
-    public function getRouteKeyName() {
-
+    public function getRouteKeyName()
+    {
         return 'uuid';
     }
 
     /**
-     * Hole relationship to Game
+     * Hole relationship to Game.
      * @return Collection   Parent Game for the Hole
      */
-    public function game() {
-
+    public function game()
+    {
         return $this->belongsTo(Game::class);
     }
 
     /**
-     * Hole relationship to PlayerScore
+     * Hole relationship to PlayerScore.
      * @return Collection   PlayerScores attached to the Hole
      */
-    public function scores() {
-
+    public function scores()
+    {
         return $this->hasMany(PlayerScore::class);
     }
 }

@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Game;
 use App\Hole;
+use Illuminate\Http\Request;
 
-class GameController extends Controller {
-
+class GameController extends Controller
+{
     /**
-     * Handles game creation
+     * Handles game creation.
      * @param  Request $request     Request object
      * @return RedirectResponse     Play RedirectResponse
      */
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $request->validate([
             'name'           => 'required|min:1|max:50',
-            'organiser_name' => 'required|min:1|max:50'
+            'organiser_name' => 'required|min:1|max:50',
         ]);
 
         /*
@@ -41,12 +40,12 @@ class GameController extends Controller {
         */
 
         $game = Game::create([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         $player = $game->players()->create([
             'name'     => $request->organiser_name,
-            'is_admin' => true
+            'is_admin' => true,
         ]);
         // Careful with mass assignment of is_admin to explicitly build
         // the data array
@@ -59,12 +58,12 @@ class GameController extends Controller {
 
     /**
      * Let's play a game!
-     * Limited to players of the game only
+     * Limited to players of the game only.
      * @param  Game   $game Game instance
      * @return View         Play View instance
      */
-    public function play(Game $game) {
-
+    public function play(Game $game)
+    {
         $playerID = session()->get('player_id');
 
         $player = $game->players()->where('id', $playerID)->first();
@@ -75,30 +74,30 @@ class GameController extends Controller {
     }
 
     /**
-     * Returns the active hole
+     * Returns the active hole.
      * @param  Game   $game Game instance to manage
      * @return array        Active hole
      */
-    public function activeHole(Game $game) {
-
+    public function activeHole(Game $game)
+    {
         $hole = $game->activeHole();
 
         return [
             'location' => $hole->location,
             'drink'    => $hole->drink,
             'par'      => $hole->par,
-            'hole'     => $hole->uuid
+            'hole'     => $hole->uuid,
         ];
     }
 
     /**
-     * Sets the active hole for a game
+     * Sets the active hole for a game.
      * @param  Game   $game Game instance
      * @param  Hole   $hole Hole instance
      * @return void
      */
-    public function setActiveHole(Game $game, Hole $hole) {
-
+    public function setActiveHole(Game $game, Hole $hole)
+    {
         $game->holes()->update(['is_active' => 0]);
 
         $hole->is_active = true;
@@ -107,19 +106,19 @@ class GameController extends Controller {
         return [
             'location' => $hole->location,
             'drink'    => $hole->drink,
-            'par'      => $hole->par
+            'par'      => $hole->par,
         ];
     }
 
     /**
      * Returns the refreshed leaderboard
      * THIS IS A BAD WAY OF DOING IT?
-     * VueJS would be perfect here, feeding data to a client side template
+     * VueJS would be perfect here, feeding data to a client side template.
      * @param  Game   $game Game instance to manage
      * @return array        Active hole
      */
-    public function leaderboard(Game $game) {
-
+    public function leaderboard(Game $game)
+    {
         $playerID = session()->get('player_id');
 
         $player = $game->players()->where('id', $playerID)->first();
@@ -131,12 +130,12 @@ class GameController extends Controller {
 
     /**
      * Edit the game
-     * Limited to admins of the game only
+     * Limited to admins of the game only.
      * @param  Game   $game Game instance to manage
      * @return View         Edit View instance
      */
-    public function edit(Game $game) {
-
+    public function edit(Game $game)
+    {
         $playerID = session()->get('player_id');
 
         $player = $game->players()->where('id', $playerID)->first();
@@ -152,16 +151,16 @@ class GameController extends Controller {
      * @param  Game    $game    Game instance
      * @return void
      */
-    public function update(Request $request, Game $game) {
-
+    public function update(Request $request, Game $game)
+    {
         $request->validate([
             'name'        => 'required|min:1|max:50',
-            'max_players' => 'required|digits_between:1,2'
+            'max_players' => 'required|digits_between:1,2',
         ]);
 
         $game->update([
             'name'        => $request->name,
-            'max_players' => $request->max_players
+            'max_players' => $request->max_players,
         ]);
     }
 }
