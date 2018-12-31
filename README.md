@@ -1,5 +1,4 @@
 [![StyleCI](https://styleci.io/repos/126613560/shield?branch=master&style=flat)](https://styleci.io/repos/126613560)
-[![Build Status](https://semaphoreci.com/api/v1/othyn/pub-golf/branches/master/shields_badge.svg)](https://semaphoreci.com/othyn/pub-golf)
 
 # pub-golf
 Basic web app for pub golf games
@@ -35,7 +34,7 @@ These are the requirements for the project specifically, installing software dep
 
 1. Run `composer install` to install the required project dependacies, this may take a while...
 
-2. Run `npm install` to install the required project dependacies, this again may take a while...
+2. Run `yarn install` to install the required project dependacies, this again may take a while...
 
 3. Run `php vendor/bin/homestead make` if you are on macOS or Linux, `vendor\\bin\\homestead make` if you are on Windows to get Homestead installed and ready for use with Vagrant
 
@@ -53,4 +52,4 @@ These are the requirements for the project specifically, installing software dep
 
 1. Any changes to the server application will be mirrored immediately to the vagrant box, so give the browser a refresh after changes and your golden
 
-2. Just updated client content? [Laravel Mix](https://laravel.com/docs/5.6/mix), a nice layer ontop of webpack config, will build the Sass and JS with a quick run of `npm run dev` or automatically with `npm run watch`
+2. Just updated client content? [Laravel Mix](https://laravel.com/docs/5.6/mix), a nice layer ontop of webpack config, will build the Sass and JS with a quick run of `yarn dev` or automatically with `yarn watch`
