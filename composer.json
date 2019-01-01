@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "^5.6",
         "laravel/tinker": "^1.0",
         "publiux/laravelcdn": "^2.0",
         "webpatser/laravel-uuid": "^3.0"
