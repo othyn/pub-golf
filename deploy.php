@@ -5,6 +5,7 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
+require 'recipe/yarn.php';
 
 // Project name
 set('application', 'Pub Golf');
@@ -38,3 +39,6 @@ after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'artisan:migrate');
+
+// Run a Yarn install to build client assets
+after('deploy:update_code', 'yarn:install');
